@@ -1,7 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy import text
-from sqlalchemy.exc import SQLAlchemyError
+
+QUERY_RESERVAS = """
+SELECT UsuarioID, HabitacionID, ReservaCreacion, Desde, Hasta, CantAdultos, CantNiños, PrecioTotal
+FROM Reservas
+"""
 
 QUERY_RESERVAS_BY_ID = """
 SELECT UsuarioID, HabitacionID, ReservaCreacion, Desde, Hasta, CantAdultos, CantNiños, PrecioTotal
@@ -19,6 +23,10 @@ def run_query(query, parameters=None):
         conn.commit()
 
     return result
+
+
+def reservas_all():
+    return run_query(QUERY_RESERVAS).fetchall()
 
 
 def reservas_by_id(res_id):
