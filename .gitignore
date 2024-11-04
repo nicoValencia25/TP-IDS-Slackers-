@@ -1,6 +1,6 @@
 .vscode
 
-api/static
+api/static/images
 api/.venv
 api/Pipfile
 api/Pipfile.lock
