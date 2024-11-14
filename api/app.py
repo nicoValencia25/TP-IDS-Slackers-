@@ -96,5 +96,35 @@ def post_reserva():
     return jsonify(data), 201
 
 
+@app.route('/api/v1/reservas/<int:res_id>', methods=['DELETE'])
+def delete_reservas(res_id):
+    try:
+        result = reservas.reservas_by_id(res_id)
+        if len(result) == 0:
+            return jsonify({'error': 'No se encontró el alumno'}), 404
+
+        reservas.reservas_remove(res_id)
+
+    except SQLAlchemyError as e:
+        return jsonify({'error': str(e)}), 500
+
+    result = result[0]
+    return (
+        jsonify(
+            {
+                "ReservaID": res_id,
+                "Creacion": result[1],
+                "Desde": result[2],
+                "Hasta": result[3],
+                "CantNiños": result[4],
+                "CantAdultos": result[5],
+                "PrecioTotal": result[6],
+                "HabID": result[7],
+                "UsuarioID": result[8],
+            }
+        ),
+        200,
+    )
+
 if __name__ == "__main__":
     app.run(port="5001", debug=True)

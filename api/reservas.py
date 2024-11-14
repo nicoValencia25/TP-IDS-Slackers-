@@ -18,6 +18,10 @@ INSERT INTO Reservas (ReservaID, Creacion, Desde, Hasta, CantNiños, CantAdultos
 VALUES (:ReservaID, :Creacion, :Desde, :Hasta, :CantNiños, :CantAdultos, :PrecioTotal, :HabID, :UsuarioID)
 """
 
+QUERY_RESERVAS_REMOVE = """
+DELETE FROM Reservas WHERE ReservaID = :ReservaID
+"""
+
 
 engine = create_engine("mysql://root:root@localhost:3306/HotelDB")
 # engine = create_engine("mysql+mysqlconnector://root@localhost:3306/HotelDB")
@@ -41,3 +45,7 @@ def reservas_by_id(res_id):
 
 def reservas_add(data):
     run_query(QUERY_RESERVAS_ADD, data)
+
+
+def reservas_remove(res_id):
+    run_query(QUERY_RESERVAS_REMOVE, {'ReservaID': res_id})
