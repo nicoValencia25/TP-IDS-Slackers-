@@ -13,6 +13,12 @@ FROM Reservas
 WHERE ReservaID = :res_id
 """
 
+QUERY_RESERVAS_ADD = """
+INSERT INTO Reservas (ReservaID, Creacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabID, UsuarioID)
+VALUES (:ReservaID, :Creacion, :Desde, :Hasta, :CantNiños, :CantAdultos, :PrecioTotal, :HabID, :UsuarioID)
+"""
+
+
 engine = create_engine("mysql://root:root@localhost:3306/HotelDB")
 # engine = create_engine("mysql+mysqlconnector://root@localhost:3306/HotelDB")
 
@@ -31,3 +37,7 @@ def reservas_all():
 
 def reservas_by_id(res_id):
     return run_query(QUERY_RESERVAS_BY_ID, {"res_id": res_id}).fetchall()
+
+
+def reservas_add(data):
+    run_query(QUERY_RESERVAS_ADD, data)

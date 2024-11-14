@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from sqlalchemy.exc import SQLAlchemyError
 
 import reservas
@@ -61,6 +61,39 @@ def get_reservas_by_id(res_id):
         ),
         200,
     )
+
+
+@app.route("/api/v1/reservas", methods=["POST"])
+def post_reserva():
+    data = request.get_json()
+
+    keys = (
+        "ReservaID",
+        "Creacion",
+        "Desde",
+        "Hasta",
+        "CantNiños",
+        "CantAdultos",
+        "PrecioTotal",
+        "HabID",
+        "UsuarioID",
+    )
+
+    for key in keys:
+        if key not in data:
+            return jsonify({"error": f"Faltan el dato {key}"}), 400
+
+    try:
+        result = reservas.reservas_by_id(data["ReservaID"])
+        if len(result) > 0:
+            return jsonify({"error": "Existe una reserva con ese mismo ID"}), 400
+
+        reservas.reservas_add(data)
+
+    except SQLAlchemyError as e:
+        return jsonify({"error": str(e)}), 500
+
+    return jsonify(data), 201
 
 
 if __name__ == "__main__":
