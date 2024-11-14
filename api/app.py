@@ -101,7 +101,7 @@ def delete_reservas(res_id):
     try:
         result = reservas.reservas_by_id(res_id)
         if len(result) == 0:
-            return jsonify({'error': 'No se encontró el alumno'}), 404
+            return jsonify({'error': 'No se encontró la reserva'}), 404
 
         reservas.reservas_remove(res_id)
 
