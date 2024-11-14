@@ -3,12 +3,12 @@ from sqlalchemy import create_engine
 from sqlalchemy import text
 
 QUERY_RESERVAS = """
-SELECT UsuarioID, HabitacionID, ReservaCreacion, Desde, Hasta, CantAdultos, CantNiños, PrecioTotal
+SELECT ReservaID, Creacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabID, UsuarioID
 FROM Reservas
 """
 
 QUERY_RESERVAS_BY_ID = """
-SELECT UsuarioID, HabitacionID, ReservaCreacion, Desde, Hasta, CantAdultos, CantNiños, PrecioTotal
+SELECT ReservaID, Creacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabID, UsuarioID
 FROM Reservas
 WHERE ReservaID = :res_id
 """

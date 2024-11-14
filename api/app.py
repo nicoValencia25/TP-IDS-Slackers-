@@ -18,14 +18,15 @@ def get_reservas():
         response.append(
             jsonify(
                 {
-                    "UsuarioID": row[0],
-                    "HabitacionID": row[1],
-                    "ReservaCreacion": row[2],
-                    "Desde": row[3],
-                    "Hasta": row[4],
+                    "ReservaID": row[0],
+                    "Creacion": row[1],
+                    "Desde": row[2],
+                    "Hasta": row[3],
+                    "CantNiños": row[4],
                     "CantAdultos": row[5],
-                    "CantNiños": row[6],
-                    "PrecioTotal": row[7],
+                    "PrecioTotal": row[6],
+                    "HabID": row[7],
+                    "UsuarioID": row[8],
                 }
             )
         )
@@ -47,14 +48,15 @@ def get_reservas_by_id(res_id):
     return (
         jsonify(
             {
-                "UsuarioID": result[0],
-                "HabitacionID": result[1],
-                "ReservaCreacion": result[2],
-                "Desde": result[3],
-                "Hasta": result[4],
+                "ReservaID": result[0],
+                "Creacion": result[1],
+                "Desde": result[2],
+                "Hasta": result[3],
+                "CantNiños": result[4],
                 "CantAdultos": result[5],
-                "CantNiños": result[6],
-                "PrecioTotal": result[7],
+                "PrecioTotal": result[6],
+                "HabID": result[7],
+                "UsuarioID": result[8],
             }
         ),
         200,
