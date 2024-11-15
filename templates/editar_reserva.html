@@ -7,49 +7,57 @@
         <h1>Fechas disponibles</h1>
         <form action="{{ url_for('reservas')}}" method="POST">
             <h5>desde</h5>
-            <label>
-                <select class="fecha_desde">
+            <label id="dia">
+                <select name="dia_desde" class="fecha_desde">
                     <option>dia 1</option>
                     <option>dia 2</option>
                     <option>dia 3</option>
                 </select>
             </label>
-            <label>
-                <select class="fecha_desde">
+            <label id="mes">
+                <select name="mes_desde" class="fecha_desde">
                     <option>mes 1</option>
                     <option>mes 2</option>
                     <option>mes 3</option>
                 </select>
             </label>
-            <label>
-                <select class="fecha_desde">
+            <label id="año"  >
+                <select name="año_desde" class="fecha_desde">
                     <option>año 1</option>
                     <option>año 2</option>
                     <option>año 3</option>
                 </select>
             </label>
             <h5>hasta</h5>
-            <label>
-                <select class="fecha_desde">
+            <label id="dia_end">
+                <select name="dia_hasta" class="fecha_desde">
                     <option>dia 1</option>
                     <option>dia 2</option>
                     <option>dia 3</option>
                 </select>
             </label>
-            <label>
-                <select class="fecha_desde">
+            <label id="mes_end">
+                <select name="mes_hasta" class="fecha_desde">
                     <option>mes 1</option>
                     <option>mes 2</option>
                     <option>mes 3</option>
             </select>
         </label>
-            <label>
-                <select class="fecha_desde">
+            <label id="año_end">
+                <select name="año_hasta" class="fecha_desde">
                     <option>año 1</option>
                     <option>año 2</option>
                     <option>año 3</option>
                 </select>
+                <input type="date">
+                <input type="month">
+                <input type="week">
+                <input type="datetime-local">
             </label>
+            <label>cantidad de adultos</label>
+            <input type="number" id="adultos" name="cantidad_de_adultos">
+            <label>cantidad de niños</label>
+            <input type="number" id="niños" name="cantidad_de_niños">
 
         <button type="submit" class="boton_confirmar">Confirmar reserva</button>
     </form>
