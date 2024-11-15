@@ -42,7 +42,7 @@ def cancelar_reserva(reserva):
     
     return render_template('cancelar_reserva.html', reserva=reserva)
 
-@app.route('/sobre_nosotros')
+@app.route('/about')
 def sobre_nosotros():
     
     return render_template('about.html')
