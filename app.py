@@ -52,5 +52,10 @@ def contacto():
     
     return render_template('contact.html')
 
+@app.route('/editar')
+def editar():
+
+    return render_template('editar_reserva.html')
+
 if __name__=='__main__':
     app.run(debug=True)

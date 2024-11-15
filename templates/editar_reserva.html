@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="contenedor_reserv">
+    <div class="contenedor_edit_reservas">
+        <img class="reserva" src="">
+        <h1>Fechas disponibles</h1>
+        <form action="{{ url_for('reservas')}}" method="POST">
+            <h5>desde</h5>
+            <label>
+                <select class="fecha_desde">
+                    <option>dia 1</option>
+                    <option>dia 2</option>
+                    <option>dia 3</option>
+                </select>
+            </label>
+            <label>
+                <select class="fecha_desde">
+                    <option>mes 1</option>
+                    <option>mes 2</option>
+                    <option>mes 3</option>
+                </select>
+            </label>
+            <label>
+                <select class="fecha_desde">
+                    <option>año 1</option>
+                    <option>año 2</option>
+                    <option>año 3</option>
+                </select>
+            </label>
+            <h5>hasta</h5>
+            <label>
+                <select class="fecha_desde">
+                    <option>dia 1</option>
+                    <option>dia 2</option>
+                    <option>dia 3</option>
+                </select>
+            </label>
+            <label>
+                <select class="fecha_desde">
+                    <option>mes 1</option>
+                    <option>mes 2</option>
+                    <option>mes 3</option>
+            </select>
+        </label>
+            <label>
+                <select class="fecha_desde">
+                    <option>año 1</option>
+                    <option>año 2</option>
+                    <option>año 3</option>
+                </select>
+            </label>
+
+        <button type="submit" class="boton_confirmar">Confirmar reserva</button>
+    </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
