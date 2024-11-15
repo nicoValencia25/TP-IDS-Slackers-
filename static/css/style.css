@@ -650,5 +650,31 @@ body {
 
 }
 .boton_confirmar{
+    margin-left: 1000px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #FFFFFF;
+    background-color: #6f42c1;
 
+}
+
+#niños{
+margin-top: 10px;
+}
+
+#adultos{
+margin-top: 10px;
+}
+
+.reserva{
+    float:right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.desde_hasta{
+    margin-top: 20px;
+    padding-top: 20px;
 }
