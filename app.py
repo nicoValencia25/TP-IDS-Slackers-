@@ -16,12 +16,12 @@ def register():
 def log():
     return render_template('iniciar_sesion.html')
 
-@app.route('/vacaciones')
+@app.route('/dest')
 def provincias():
     
     return render_template('destination.html')
 
-@app.route('/booking')
+@app.route('/book')
 def hoteles():
 
     return render_template('booking.html')
@@ -56,7 +56,7 @@ def cancelar_reserva(reserva):
     
     return render_template('cancelar_reserva.html', reserva=reserva)
 
-@app.route('/about')
+@app.route('/us')
 def sobre_nosotros():
     
     return render_template('about.html')
@@ -70,6 +70,14 @@ def contacto():
 def editar():
 
     return render_template('editar_reserva.html')
+
+@app.route('/service')
+def service():
+    return render_template('service.html')
+
+@app.route('/package')
+def package():
+    return render_template('package.html')
 
 if __name__=='__main__':
     app.run(debug=True)
