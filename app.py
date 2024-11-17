@@ -7,13 +7,27 @@ def home():
     
     return render_template('index.html')
 
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/log')
+def log():
+    return render_template('iniciar_sesion.html')
+
 @app.route('/vacaciones')
 def provincias():
     
     return render_template('destination.html')
 
+@app.route('/booking')
+def hoteles():
+
+    return render_template('booking.html')
+
 @app.route('/vacaciones/<string:provincia>')
-def hoteles(provincia):
+def hoteles2(provincia):
 
     return render_template('booking.html', provincia=provincia)
 

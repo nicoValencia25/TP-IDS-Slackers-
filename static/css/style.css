@@ -250,7 +250,7 @@ body {
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(88, 0, 229, 0.7), rgba(74, 21, 232, 0.7)), url(../img/bg-hero);
+    background: linear-gradient(rgba(88, 0, 229, 0.7), rgba(74, 21, 232, 0.7)), url(../static/img/bg-hero);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -532,7 +532,7 @@ body {
     padding-bottom: 50px;
     margin-bottom: -50px;
 
-    
+
 }
 
 .reservas_title {
@@ -566,7 +566,7 @@ body {
     margin-left: 950px;
     padding: 10px;
     margin-right: 10px;
-    background-color: rgb(101, 63, 154);
+    background-color: rgb(30, 31, 34);
     border: 0px;
     color: #FFFFFF;
 }
@@ -656,7 +656,7 @@ body {
     padding-bottom: 10px;
     padding-top: 10px;
     color: #FFFFFF;
-    background-color: #6f42c1;
+    background-color: #6610f2;
 
 }
 
@@ -677,4 +677,81 @@ margin-top: 10px;
 .desde_hasta{
     margin-top: 20px;
     padding-top: 20px;
+}
+
+.reservar_ahora{
+    margin-left: 1000px;
+    padding: 10px;
+    margin-right: 10px;
+    background-color: #6610f2;
+    border: 0px;
+    color: #FFFFFF;
+}
+
+.contenedor_reser2{
+    padding-left: 200px;
+    color: #6610f2;
+    background-color: #6610f2;
+    padding-bottom:0px;
+    height: fit-content;
+    padding-bottom: 50px;
+    margin-bottom: -50px;
+}
+.inicio_sesion{
+    color: #FFFFFF;
+    padding-top: 10px;
+    margin-left: 0px;
+}
+.form_label{
+    font-size: large;
+    margin-top: 20px;
+
+}
+
+.contenedor_inicio_sesion{
+background-color: #6610f2;
+    color: #FFFFFF;
+    font-size: large;
+    margin-left: 650px;
+    margin-right: 650px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 60px;
+
+}
+
+.boton_log{
+    float: right;
+    color: #FFFFFF;
+    background-color: #86B817;
+    border-color: #86B817;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 50rem;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.campos_form{
+    float: right;
+    margin-top: 12px;
+}
+.text_form{
+    margin-top: 20px;
+}
+
+.redirect{
+    float: left;
+    color: #FFFFFF;
+    background-color: #86B817;
+    border-color: #86B817;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 50rem;
+    font-size: 1rem;
+    margin-top: 5px;
 }

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="contenedor_inicio_sesion">
+    <h2 class="inicio_sesion">Register</h2>
+        <form action="{{ url_for('register')}}" method="POST">
+            <label class="form_label" for="user_name">Ingrese su nombre</label>
+            <input type="text" name="nombre" id="user_name" placeholder="nombre" class="campos_form">
+            <br>
+            <label for="user_lname" class="form_label">Ingrese su apellido</label>
+            <input type="text" name="apellido" id="user_lname" placeholder="apellido" class="campos_form">
+            <br>
+            <label for="user_cel" class="form_label">Ingrese su telefono</label>
+            <input type="tel" name="telefono" id="user_cel" class="campos_form" placeholder="telefono">
+            <br>
+            <label for="user_nac" class="form_label">Ingrese su fecha de nacimiento</label>
+            <input type="date" name="nacimiento" id="user_nac" class="campos_form" placeholder="">
+            <br>
+            <label for="user_dni" class="form_label">Ingrese su DNI</label>
+            <input type="number" name="dni" id="user_dni" class="campos_form" placeholder="DNI">
+            <br>
+            <label for="user_email" class="form_label">Ingrese un email valido</label>
+            <input type="email" name="email" id="user_email" placeholder="email" class="campos_form">
+            <br>
+            <label for="password" class="form_label">Ingrese su contraseña</label>
+            <input type="password" name="contraseña" id="password" placeholder="contraseña " class="campos_form">
+            <br>
+            <p class="text_form">(si es la primera vez que inicia sesion se creara una cuenta con la contraseña y el email seleccionado)</p>
+            <button type="submit" class="boton_log">Register</button>
+        </form>
+        <button class="redirect" onclick="location.href='log'">Log in</button>
+</div>
+
+
+
+
+
+
+{% endblock %}

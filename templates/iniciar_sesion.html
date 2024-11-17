@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="contenedor_inicio_sesion">
+    <h2 class="inicio_sesion">Inicio de sesion</h2>
+        <form action="{{ url_for('log')}}" method="POST">
+            <label class="form_label" for="user_name">Ingrese su nombre</label>
+            <input type="text" name="nombre" id="user_name" placeholder="nombre" class="campos_form">
+            <br>
+            <label for="user_lname" class="form_label">Ingrese su apellido</label>
+            <input type="text" name="apellido" id="user_lname" placeholder="apellido" class="campos_form">
+            <br>
+            <label for="user_email" class="form_label">Ingrese su email</label>
+            <input type="email" name="email" id="user_email" placeholder="email" class="campos_form">
+            <br>
+            <label for="password" class="form_label">Ingrese su contraseña</label>
+            <input type="password" name="contraseña" id="password" placeholder="contraseña " class="campos_form">
+            <br>
+            <button type="submit" class="boton_log">Log in</button>
+        </form>
+
+</div>
+
+{% endblock %}
