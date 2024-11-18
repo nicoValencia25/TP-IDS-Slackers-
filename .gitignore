@@ -4,3 +4,9 @@ api/static/images
 api/.venv
 api/Pipfile
 api/Pipfile.lock
+__pycache__/app.cpython-312.pyc
+__pycache__/app.cpython-312.pyc
+api/__pycache__/app.cpython-312.pyc
+api/__pycache__/reservas.cpython-312.pyc
+__pycache__/app.cpython-312.pyc
+__pycache__/app.cpython-312.pyc
