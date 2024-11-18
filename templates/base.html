@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Tourist - Travel Agency HTML Template</title>
+    <title>Aterrizar.com</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -47,15 +47,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/templates/index.html" class="nav-item nav-link">Home</a>
+                <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>
                 <a href="" class="nav-item nav-link">About</a>
                 <a href="{{ url_for('service') }}" class="nav-item nav-link">Services</a>
                 <a href="{{ url_for('package') }}" class="nav-item nav-link">Packages</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu m-0">
-                        <a href="" class="dropdown-item">Destination</a>
-                        <a href="" class="dropdown-item active">Booking</a>
+                        <a href="{{ url_for('provincias') }}" class="dropdown-item">Destination</a>
+                        <a href="{{ url_for('hoteles') }}" class="dropdown-item active">Booking</a>
                         <a href="/templates/team.html" class="dropdown-item">Travel Guides</a>
                         <a href="/templates/testimonial.html" class="dropdown-item">Testimonial</a>
                         <a href="{{ url_for('reservas') }}" class="dropdown-item">Mis reservas</a>
