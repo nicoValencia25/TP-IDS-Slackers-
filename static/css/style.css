@@ -760,7 +760,8 @@ background-color: #6610f2;
     background-color: #FFFFFF;
     float: left;
     width: 715px;
-
+    margin-top: 0px;
+    margin-left: 0px;
 
 }
 
@@ -847,7 +848,7 @@ th{
 .imagen_info_hotel2{
      width: 600px;
     height: 300px;
-    margin-top: 20px;
+    margin-top: 0px;
     margin-left: 47px;
     margin-bottom: 20px;
     margin-right: 47px;
@@ -856,7 +857,7 @@ th{
 
 .mapa_reserva{
     width: 715px;
-    height: 500px;
+    height: 440px;
     margin-top: 0px;
 }
 
@@ -864,7 +865,7 @@ th{
 .imagen_info_hotel3{
      width: 1000px;
     height: 300px;
-    margin-top: -310px;
+    margin-top: 0px;
     margin-left: 47px;
     margin-bottom: 20px;
     margin-right: 47px;
