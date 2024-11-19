@@ -853,3 +853,9 @@ th{
     margin-right: 47px;
     float: right;
 }
+
+.mapa_reserva{
+    width: 700px;
+    height: 500px;
+    margin-top: 40px;
+}
