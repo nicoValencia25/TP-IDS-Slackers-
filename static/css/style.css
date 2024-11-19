@@ -755,3 +755,101 @@ background-color: #6610f2;
     font-size: 1rem;
     margin-top: 5px;
 }
+
+.contenedor_info{
+    background-color: #FFFFFF;
+    float: left;
+    width: 700px;
+
+
+}
+
+.texto_info{
+    color: black;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+.contenedor_info_back{
+    align-content: center;
+    padding-left: 20px;
+    color: #6610f2;
+    background-color: #6610f2;
+    padding-bottom:0px;
+    height: fit-content;
+    padding-bottom: 50px;
+    margin-bottom: -50px;
+    padding-right: 50px;
+    padding-top: 70px;
+}
+
+.texto_info_titulo{
+    margin-left: 20px;
+    padding-top: 10px;
+}
+
+.imagen_info_hotel{
+
+    width: 300px;
+    height: 300px;
+    margin-top: 10px;
+    margin-left: 47px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+
+
+.tabla_habitaciones{
+    border: solid 1px #0d6efd;
+    table-layout: fixed;
+    float: right;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+
+}
+
+.thead_hab{
+    background-color: #6610f2;
+    font-weight: 700;
+    color: #FFFFFF;
+    padding: 20px 15px;
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+}
+th{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.td_hab{
+    padding: 15px;
+    border-bottom: solid 1px #6610f2;
+    border-right: solid 1px #6610f2;
+}
+
+.texto_info_titulo_tabla{
+    margin-top: 20px;
+    width: 500px;
+    margin-left: 47px;
+}
+
+.contenedor_info2{
+    background-color: #FFFFFF;
+    float: right;
+    width: 1110px;
+    justify-content: center;
+}
+
+.imagen_info_hotel2{
+     width: 300px;
+    height: 300px;
+    margin-top: 10px;
+    margin-left: 47px;
+    margin-bottom: 20px;
+    margin-right: 47px;
+    float: right;
+}
