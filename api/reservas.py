@@ -23,8 +23,8 @@ DELETE FROM Reservas WHERE ReservaID = :ReservaID
 """
 
 
-engine = create_engine("mysql://root:root@localhost:3306/HotelDB")
-# engine = create_engine("mysql+mysqlconnector://root@localhost:3306/HotelDB")
+engine = create_engine("mysql://root:root@localhost:3306/HotelBD")
+# engine = create_engine("mysql+mysqlconnector://root@localhost:3306/HotelBD")
 
 
 def run_query(query, parameters=None):
