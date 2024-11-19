@@ -762,6 +762,7 @@ background-color: #6610f2;
     width: 715px;
     margin-top: 0px;
     margin-left: 0px;
+    border-radius: 1rem;
 
 }
 
@@ -843,6 +844,7 @@ th{
     float: right;
     width: 1110px;
     justify-content: center;
+    border-radius: 1rem;
 }
 
 .imagen_info_hotel2{
@@ -856,9 +858,10 @@ th{
 }
 
 .mapa_reserva{
-    width: 715px;
+    width: 650px;
     height: 440px;
     margin-top: 0px;
+    border-radius: 1rem;
 }
 
 
