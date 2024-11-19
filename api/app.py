@@ -16,19 +16,17 @@ def get_reservas():
     response = []
     for row in result:
         response.append(
-            jsonify(
-                {
-                    "ReservaID": row[0],
-                    "Creacion": row[1],
-                    "Desde": row[2],
-                    "Hasta": row[3],
-                    "CantNiños": row[4],
-                    "CantAdultos": row[5],
-                    "PrecioTotal": row[6],
-                    "HabID": row[7],
-                    "UsuarioID": row[8],
-                }
-            )
+            {
+                "ReservaID": row[0],
+                "Creacion": row[1],
+                "Desde": row[2],
+                "Hasta": row[3],
+                "CantNiños": row[4],
+                "CantAdultos": row[5],
+                "PrecioTotal": row[6],
+                "HabID": row[7],
+                "UsuarioID": row[8],
+            }
         )
 
     return jsonify(response), 200
@@ -96,17 +94,17 @@ def post_reserva():
     return jsonify(data), 201
 
 
-@app.route('/api/v1/reservas/<int:res_id>', methods=['DELETE'])
+@app.route("/api/v1/reservas/<int:res_id>", methods=["DELETE"])
 def delete_reservas(res_id):
     try:
         result = reservas.reservas_by_id(res_id)
         if len(result) == 0:
-            return jsonify({'error': 'No se encontró la reserva'}), 404
+            return jsonify({"error": "No se encontró la reserva"}), 404
 
         reservas.reservas_remove(res_id)
 
     except SQLAlchemyError as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({"error": str(e)}), 500
 
     result = result[0]
     return (
@@ -125,6 +123,7 @@ def delete_reservas(res_id):
         ),
         200,
     )
+
 
 if __name__ == "__main__":
     app.run(port="5001", debug=True)
