@@ -701,8 +701,9 @@ margin-top: 10px;
 }
 .inicio_sesion{
     color: #FFFFFF;
-    padding-top: 10px;
-    margin-left: 0px;
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .form_label{
@@ -714,15 +715,15 @@ margin-top: 10px;
 background-color: #6610f2;
     color: #FFFFFF;
     font-size: large;
-    margin-left: 650px;
-    margin-right: 650px;
+    margin: auto;
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 60px;
+    text-align: center;
+    width: 450px;
 }
 
 .boton_log{
-    float: right;
     color: #FFFFFF;
     background-color: #86B817;
     border-color: #86B817;
@@ -736,8 +737,14 @@ background-color: #6610f2;
 }
 
 .campos_form{
-    float: right;
-    margin-top: 12px;
+    width: 100%;
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 4px;
+    margin-inside: 16px;
+    border: 1px solid #6610f2;
+    font-size: 18px;
+
 }
 
 .text_form{
@@ -745,7 +752,7 @@ background-color: #6610f2;
 }
 
 .redirect{
-    float: left;
+
     color: #FFFFFF;
     background-color: #86B817;
     border-color: #86B817;
@@ -755,7 +762,8 @@ background-color: #6610f2;
     padding-right: 1.5rem;
     border-radius: 50rem;
     font-size: 1rem;
-    margin-top: 5px;
+    margin-top: 20px;
+    width: 100px;
 }
 
 .contenedor_info{
@@ -976,4 +984,13 @@ th{
     margin-top: 50px;
     margin-right: 250px;
     border-radius: 20px;
+}
+
+.form_register{
+    width: 350px;
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 4px;
+    color: #6610f2;
+    margin: auto;
 }
