@@ -124,9 +124,9 @@
 
 
 <h2 class="titulo_actuales" style="margin-top: 70px">Realice su reserva</h2>
-<div class="contenedor_reserv" style="padding-top: 20px">
+<div class="contenedor_reserv_fin"  >
     <div class="contenedor_edit_reservas">
-        <img class="reserva" src="/static/img/destination-1.jpg" alt="">
+
         <form  class="formulario_reserva" action="{{ url_for('reservas')}}" method="POST">
 
             <label class="text_form_reserv" for="reserva_desde">Fecha de inicio de la reserva</label>
@@ -152,6 +152,18 @@
         <button type="submit" class="boton_confirmar">Confirmar reserva</button>
     </form>
     </div>
+<div class="cont_precio_final">
+    <h3 class="titulo_precio_final">Precio Final</h3>
+    <p class="precio_final">$00000/0000USD</p>
+
+
+
+
+</div>
+<img class="below_pf" src="/static/img/destination-1.jpg" alt="">
+
+
+
 </div>
 
 

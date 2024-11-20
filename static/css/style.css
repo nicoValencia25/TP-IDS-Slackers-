@@ -922,3 +922,56 @@ th{
 
 
 }
+
+.cont_precio_final{
+    background-color: #FFFFFF;
+    width: 200px;
+    height: 100px;
+    float: right;
+    margin-right: 550px;
+    margin-top: 80px;
+    border-radius: 40px;
+
+}
+
+.titulo_precio_final{
+    text-align: center;
+    margin: 10px;
+
+}
+
+.contenedor_edit_reservas{
+    width: 450px;
+    float: left;
+
+
+
+}
+
+.contenedor_reserv_fin{
+       padding-left: 200px;
+    color: #9d9d9d;
+    background-color: #afafaf;
+
+    height: fit-content;
+    margin-bottom: -50px;
+    padding-bottom: 700px;
+    padding-top: 20px;
+    border: #6610f2;
+
+}
+
+.precio_final{
+    color: green;
+    font-size: large;
+    text-align: center;
+
+}
+.below_pf{
+    width: 800px;
+    height: 400px;
+    float: right;
+    margin-top: 50px;
+    margin-right: 250px;
+    border-radius: 20px;
+}
