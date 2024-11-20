@@ -833,6 +833,8 @@ th{
     padding: 15px;
     border-bottom: solid 1px #6610f2;
     border-right: solid 1px #6610f2;
+    background-color: #FFFFFF;
+    color: #6610f2;
 }
 
 .texto_info_titulo_tabla{
