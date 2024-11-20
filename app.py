@@ -37,9 +37,9 @@ def habitaciones(hotel):
     return render_template('habitaciones.html', hotel=hotel)
 
 @app.route('/vacaciones/<string:provincia>/<string:hotel>/<string:habitacion>')
-def reservar(habitacion):
+def reservar2(habitacion):
     
-    return render_template('reservar.html', habitacion=habitacion)
+    return render_template('reservar2.html', habitacion=habitacion)
 
 @app.route('/reservas')
 def reservas():
@@ -49,7 +49,7 @@ def reservas():
 @app.route('/reservas/<string:reserva>/editar_reserva')
 def editar_reserva(reserva):
     
-    return render_template('editar_reserva.html', reserva=reserva)
+    return render_template('reservar.html', reserva=reserva)
 
 @app.route('/reservas/<string:reserva>/cancelar_reserva')
 def cancelar_reserva(reserva):
@@ -66,8 +66,13 @@ def contacto():
     
     return render_template('contact.html')
 
+@app.route('/reservar')
+def reservar_hotel():
+
+    return render_template('reservar.html')
+
 @app.route('/editar')
-def editar():
+def reservar_editar():
 
     return render_template('editar_reserva.html')
 
