@@ -1,10 +1,11 @@
 from flask import Flask, jsonify, request
 from sqlalchemy.exc import SQLAlchemyError
-
+import mysql.connector as db
 import reservas
 
 app = Flask(__name__)
 
+PORT = 5000
 
 @app.route("/api/v1/reservas", methods=["GET"])
 def get_reservas():
@@ -126,4 +127,4 @@ def delete_reservas(res_id):
 
 
 if __name__ == "__main__":
-    app.run(port="5001", debug=True)
+    app.run(host="0.0.0.0", port=PORT, debug=True)

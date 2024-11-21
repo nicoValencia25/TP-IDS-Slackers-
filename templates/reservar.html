@@ -117,23 +117,23 @@
         <form  class="formulario_reserva" action="{{ url_for('reservas')}}" method="POST">
 
             <label class="text_form_reserv" for="reserva_desde">Fecha de inicio de la reserva</label>
-                <input type="date" class="input_form_fechas" id="reserva_desde">
+                <input type="date" class="input_form_fechas" id="reserva_desde" name="reserva_desde">
 
 
 
             <label class="text_form_reserv" for="reserva_hasta">Fecha de finalizacion de la reserva</label>
-                <input type="date" class="input_form_fechas" id="reserva_hasta">
+                <input type="date" class="input_form_fechas" id="reserva_hasta" name="reserva_hasta">
 
 
             <label class="text_form_reserv" for="habitacion_id">Tipo de Habitacion (ID)</label>
-                <input type="number" class="input_form" id="habitacion_id">
+                <input type="number" class="input_form" id="habitacion_id" name="habitacion_id">
 
 
             <label class="text_form_reserv" for="adultos"> Cantidad de adultos</label>
-            <input class="input_form" type="number" id="adultos" name="cantidad_de_adultos">
+            <input class="input_form" type="number" id="cantidad_de_adultos" name="cantidad_de_adultos">
 
             <label class="text_form_reserv" for="niños"> Cantidad de niños</label>
-            <input class="input_form" type="number" id="niños" name="cantidad_de_niños">
+            <input class="input_form" type="number" id="cantidad_de_niños" name="cantidad_de_niños">
 
 
         <button type="submit" class="boton_confirmar">Confirmar reserva</button>

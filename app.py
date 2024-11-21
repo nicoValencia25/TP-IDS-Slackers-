@@ -1,19 +1,29 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+import requests
+from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
 
+API_URL = 'http://localhost:5000/api/v1/'
 app = Flask(__name__)
+app.secret_key = "clave_secreta"
 
+users = {}
 @app.route('/')
 def home():
-    
-    return render_template('index.html')
+    return redirect(url_for('log'))
 
-
-@app.route('/register')
-def register():
-    return render_template('register.html')
-
-@app.route('/log')
+@app.route('/log', methods=['GET', 'POST'])
 def log():
+    if request.method == 'POST':
+        username = request.form.get('nombre')
+        userlname = request.form.get('apellido')
+        password = request.form.get('contraseña')
+        email = request.form.get('email')
+        if email in users and users[email] == password:
+            session['user'] = email
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('log'))
+
     return render_template('iniciar_sesion.html')
 
 @app.route('/dest')
@@ -23,13 +33,10 @@ def provincias():
 
 @app.route('/book')
 def hoteles():
-
-    return render_template('booking.html')
-
-@app.route('/vacaciones/<string:provincia>')
-def hoteles2(provincia):
-
-    return render_template('booking.html', provincia=provincia)
+        response = requests.get(API_URL + 'hoteles')
+        response.raise_for_status()
+        hoteles_all = response.json()
+        return render_template('booking.html', hoteles=hoteles_all)
 
 @app.route('/vacaciones/<string:provincia>/<string:hotel>')
 def habitaciones(hotel):
@@ -41,7 +48,7 @@ def reservar2(habitacion):
     
     return render_template('reservar2.html', habitacion=habitacion)
 
-@app.route('/reservas')
+@app.route('/reservas/')
 def reservas():
     
     return render_template('reservas_act.html')
@@ -68,6 +75,13 @@ def contacto():
 
 @app.route('/reservar')
 def reservar_hotel():
+    if request.method == 'POST':
+        inicio = request.form.get('reserva_desde')
+        fin = request.form.get('reserva_hasta')
+        habitacion_id = request.form.get('habitacion_id')
+        adultos = request.form.get('cantidad_de_adultos')
+        niños = request.form.get('cantidad_de_niños')
+
 
     return render_template('reservar.html')
 
@@ -85,4 +99,4 @@ def package():
     return render_template('package.html')
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
