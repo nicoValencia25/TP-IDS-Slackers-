@@ -1,33 +1,41 @@
 from flask import Flask, jsonify, request
 from sqlalchemy.exc import SQLAlchemyError
-import mysql.connector as db
-import reservas
+
+from reservas import db, reservas_all, reservas_by_id, reservas_add, reservas_remove
 
 app = Flask(__name__)
 
 PORT = 5000
 
+# Database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://<DB_USER>:<DB_PASSWORD>@<DB_HOST>/<DB_NAME>'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Avoids a warning from SQLAlchemy
+
+db.init_app(app)
+
 @app.route("/api/v1/reservas", methods=["GET"])
 def get_reservas():
     try:
-        result = reservas.reservas_all()
+        result = reservas_all()
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
     response = []
     for row in result:
         response.append(
-            {
-                "ReservaID": row[0],
-                "Creacion": row[1],
-                "Desde": row[2],
-                "Hasta": row[3],
-                "CantNiños": row[4],
-                "CantAdultos": row[5],
-                "PrecioTotal": row[6],
-                "HabID": row[7],
-                "UsuarioID": row[8],
-            }
+            jsonify(
+                {
+                    "ReservaID": row[0],
+                    "Creacion": row[1],
+                    "Desde": row[2],
+                    "Hasta": row[3],
+                    "CantNiños": row[4],
+                    "CantAdultos": row[5],
+                    "PrecioTotal": row[6],
+                    "HabID": row[7],
+                    "UsuarioID": row[8],
+                }
+            )
         )
 
     return jsonify(response), 200
@@ -36,7 +44,7 @@ def get_reservas():
 @app.route("/api/v1/reservas/<int:res_id>", methods=["GET"])
 def get_reservas_by_id(res_id):
     try:
-        result = reservas.reservas_by_id(res_id)
+        result = reservas_by_id(res_id)
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
@@ -83,11 +91,11 @@ def post_reserva():
             return jsonify({"error": f"Faltan el dato {key}"}), 400
 
     try:
-        result = reservas.reservas_by_id(data["ReservaID"])
+        result = reservas_by_id(data["ReservaID"])
         if len(result) > 0:
             return jsonify({"error": "Existe una reserva con ese mismo ID"}), 400
 
-        reservas.reservas_add(data)
+        reservas_add(data)
 
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
@@ -95,17 +103,17 @@ def post_reserva():
     return jsonify(data), 201
 
 
-@app.route("/api/v1/reservas/<int:res_id>", methods=["DELETE"])
+@app.route('/api/v1/reservas/<int:res_id>', methods=['DELETE'])
 def delete_reservas(res_id):
     try:
-        result = reservas.reservas_by_id(res_id)
+        result = reservas_by_id(res_id)
         if len(result) == 0:
-            return jsonify({"error": "No se encontró la reserva"}), 404
+            return jsonify({'error': 'No se encontró la reserva'}), 404
 
-        reservas.reservas_remove(res_id)
+        reservas_remove(res_id)
 
     except SQLAlchemyError as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({'error': str(e)}), 500
 
     result = result[0]
     return (
@@ -124,7 +132,6 @@ def delete_reservas(res_id):
         ),
         200,
     )
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=PORT, debug=True)
