@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="@color/background_recycler_view"
+    app:cardCornerRadius="36dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvHotelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:textColor="@color/hotel_name_color"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Nombre de hotel" />
+
+        <ImageView
+            android:id="@+id/ivHotel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            tools:src="@android:drawable/bottom_bar" />
+
+        <TextView
+            android:id="@+id/tvHotelDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:textColor="@color/hotel_description_color"
+            android:textSize="16sp"
+            tools:text="Descripcion:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non mattis odio. Duis pellentesque diam at lacus convallis laoreet. Sed ut est arcu. Fusce non consectetur nunc. Nunc in lectus sodales, sagittis sem in, consequat turpis. Pellentesque consectetur leo sed magna pellentesque, sit amet commodo est commodo. Praesent justo enim, ornare id interdum sed, vehicula et ipsum. Aenean sit amet ultricies ipsum, a varius quam. " />
+
+        <Button
+            android:id="@+id/btnHotel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="8dp"
+            android:backgroundTint="@color/hotel_button_color"
+            android:textColor="@color/hotel_button_text_color"
+            android:text="@string/hotel_button" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

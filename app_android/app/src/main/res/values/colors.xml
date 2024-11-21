@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="background">#FFCCB7f8</color>
+    <color name="background_recycler_view">#FF550FEC</color>
+
+    <color name="hotel_name_color">#FFCCB7f8</color>
+    <color name="hotel_description_color">#FFCCB7f8</color>
+    <color name="hotel_button_text_color">#FF000000</color>
+    <color name="hotel_button_color">#FFCCB7f8</color>
 </resources>
