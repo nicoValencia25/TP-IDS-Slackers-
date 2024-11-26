@@ -16,7 +16,7 @@ WHERE UsuarioID = :UsuarioID
 """
 
 QUERY_USUARIO_ADD = """
-INSERT INTO usuarios (UsuarioID, Nombre, Apellido, Nacimiento, Email, Contraseña, Telefono, DNI, Pais)
+INSERT INTO Usuarios (UsuarioID, Nombre, Apellido, Nacimiento, Email, Contraseña, Telefono, DNI, Pais)
 VALUES (:UsuarioID, :Nombre, :Apellido, :Nacimiento, :Email, :Contraseña, :Telefono, :DNI, :Pais)
 """
 

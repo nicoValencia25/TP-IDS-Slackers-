@@ -16,7 +16,7 @@ WHERE ServicioID = :ServicioID
 """
 
 QUERY_SERVICIO_ADD = """
-INSERT INTO servicios (ServicioID, Nombre, Precio, ImgServicio, HotelID, Descripcion, TipoDePago)
+INSERT INTO Servicios (ServicioID, Nombre, Precio, ImgServicio, HotelID, Descripcion, TipoDePago)
 VALUES (:ServicioID, :Nombre, :Precio, :ImgServicio, :HotelID, :Descripcion, :TipoDePago)
 """
 

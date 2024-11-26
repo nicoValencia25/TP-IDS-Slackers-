@@ -5,19 +5,19 @@ from api.db_utils import run_query
 img_habitaciones_blueprint = Blueprint('img_habitaciones_blueprint', __name__)
 
 QUERY_IMG_HABITACIONES = """
-SELECT ImgHabitacionID, ImgHabitacion, HabitacionID
+SELECT ImgHabitacionID, ImgHabitacion, TipoID
 FROM ImgHabitaciones
 """
 
 QUERY_IMG_HABITACION_BY_ID = """
-SELECT ImgHabitacionID, ImgHabitacion, HabitacionID
+SELECT ImgHabitacionID, ImgHabitacion, TipoID
 FROM ImgHabitaciones
 WHERE ImgHabitacionID = :ImgHabitacionID
 """
 
 QUERY_IMG_HABITACION_ADD = """
-INSERT INTO img_habitaciones (ImgHabitacionID, ImgHabitacion, HabitacionID)
-VALUES (:ImgHabitacionID, :ImgHabitacion, :HabitacionID)
+INSERT INTO ImgHabitaciones (ImgHabitacionID, ImgHabitacion, TipoID)
+VALUES (:ImgHabitacionID, :ImgHabitacion, :TipoID)
 """
 
 QUERY_IMG_HABITACION_DELETE = """
@@ -70,7 +70,7 @@ def add_img_habitacion():
     keys = (
         "ImgHabitacionID",
         "ImgHabitacion",
-        "HabitacionID",
+        "TipoID"
     )
 
     for key in keys:

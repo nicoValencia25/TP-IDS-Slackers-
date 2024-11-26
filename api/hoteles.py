@@ -5,19 +5,19 @@ from api.db_utils import run_query
 hoteles_blueprint = Blueprint('hoteles_blueprint', __name__)
 
 QUERY_HOTELES = """
-SELECT HotelID, Nombre, Provincia, ImgHotel, Descripcion, Direccion, CodigoPostal, Localidad, Longitud, Latitud
+SELECT HotelID, Nombre, Provincia, Descripcion, Direccion, CodigoPostal, Localidad, Longitud, Latitud
 FROM Hoteles
 """
 
 QUERY_HOTEL_BY_ID = """
-SELECT HotelID, Nombre, Provincia, ImgHotel, Descripcion, Direccion, CodigoPostal, Localidad, Longitud, Latitud
+SELECT HotelID, Nombre, Provincia, Descripcion, Direccion, CodigoPostal, Localidad, Longitud, Latitud
 FROM Hoteles
 WHERE HotelID = :HotelID
 """
 
 QUERY_HOTEL_ADD = """
-INSERT INTO hoteles (HotelID, Nombre, Provincia, ImgHotel, Descripcion, Direccion, CodigoPostal, Localidad, Longitud, Latitud)
-VALUES (:HotelID, :Nombre, :Provincia, :ImgHotel, :HotelID, :Descripcion, :Direccion, :CodigoPostal, :Localidad, :Longitud, :Latitud)
+INSERT INTO Hoteles (HotelID, Nombre, Provincia, Descripcion, Direccion, CodigoPostal, Localidad, Longitud, Latitud)
+VALUES (:HotelID, :Nombre, :Provincia, :HotelID, :Descripcion, :Direccion, :CodigoPostal, :Localidad, :Longitud, :Latitud)
 """
 
 QUERY_HOTEL_DELETE = """
@@ -71,7 +71,6 @@ def add_hotel():
         "HotelID",
         "Nombre",
         "Provincia",
-        "ImgHotel",
         "HotelID",
         "Descripcion",
         "Direccion",

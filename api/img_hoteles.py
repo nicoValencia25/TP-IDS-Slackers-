@@ -16,7 +16,7 @@ WHERE ImgHotelID = :ImgHotelID
 """
 
 QUERY_IMG_HOTEL_ADD = """
-INSERT INTO img_hoteles (ImgHotelID, ImgHotel, HotelID)
+INSERT INTO ImgHoteles (ImgHotelID, ImgHotel, HotelID)
 VALUES (:ImgHotelID, :ImgHotel, :HotelID)
 """
 

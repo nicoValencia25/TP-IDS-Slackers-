@@ -5,16 +5,18 @@ from api.db_utils import run_query
 servicios_contratados_blueprint = Blueprint('servicios_contratados_blueprint', __name__)
 
 QUERY_SERVICIOS_CONTRATADOS = """
-SELECT ServicioContratadoID, Creacion, PrecioTotal, ServicioID, ReservaIos_ReservaIDs
+SELECT ServicioContratadoID, Creacion, PrecioTotal, ServicioID, ReservaID
+FROM ServiciosContratados
 """
 
 QUERY_SERVICIO_CONTRATADO_BY_ID = """
 SELECT ServicioContratadoID, Creacion, PrecioTotal, ServicioID, ReservaID
-FROM ServiciosContratvicReservaIDdoID = :ServicioContratadoID
+FROM ServiciosContratados 
+WHERE ServicioContratadoID = :ServicioContratadoID
 """
 
 QUERY_SERVICIO_CONTRATADO_ADD = """
-INSERT INTO servicios_contratados (ServicioContratadoID, Creacion, PrecioTotal, ServicioID, ReservaID)
+INSERT INTO ServiciosContratados (ServicioContratadoID, Creacion, PrecioTotal, ServicioID, ReservaID)
 VALUES (:ServicioContratadoID, :Creacion, :PrecioTotal, :ServicioID, :ReservaID)
 """
 

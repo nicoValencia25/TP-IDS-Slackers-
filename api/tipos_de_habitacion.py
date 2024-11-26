@@ -36,7 +36,7 @@ def tipo_add(data):
 def tipo_delete(tipo_id):
     run_query(QUERY_TIPO_DELETE, {'TipoID': tipo_id})
     
-@tipos_de_habitacion_blueprint.route("/api/v1/tipos", methods=["GET"])
+@tipos_de_habitacion_blueprint.route("/api/v1/tipos_de_habitacion", methods=["GET"])
 def get_tipos():
     try:
         result = tipos_all()
@@ -46,7 +46,7 @@ def get_tipos():
     return(jsonify(result), 200)
 
 
-@tipos_de_habitacion_blueprint.route("/api/v1/tipos/<int:tipo_id>", methods=["GET"])
+@tipos_de_habitacion_blueprint.route("/api/v1/tipos_de_habitacion/<int:tipo_id>", methods=["GET"])
 def get_tipo_by_id(tipo_id):
     try:
         result = tipo_by_id(tipo_id)
@@ -63,7 +63,7 @@ def get_tipo_by_id(tipo_id):
     )
 
 
-@tipos_de_habitacion_blueprint.route("/api/v1/tipos", methods=["POST"])
+@tipos_de_habitacion_blueprint.route("/api/v1/tipos_de_habitacion", methods=["POST"])
 def add_tipo():
     data = request.get_json()
 
@@ -95,7 +95,7 @@ def add_tipo():
     return jsonify(data), 201
 
 
-@tipos_de_habitacion_blueprint.route('/api/v1/tipos/<int:tipo_id>', methods=['DELETE'])
+@tipos_de_habitacion_blueprint.route('/api/v1/tipos_de_habitacion/<int:tipo_id>', methods=['DELETE'])
 def delete_tipo(tipo_id):
     try:
         result = tipo_by_id(tipo_id)
