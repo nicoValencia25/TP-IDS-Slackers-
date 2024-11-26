@@ -44,7 +44,7 @@ def get_reservas():
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
-    return jsonify(result), 200
+    return(jsonify(result), 200)
 
 
 @reservas_blueprint.route("/api/v1/reservas/<int:res_id>", methods=["GET"])

@@ -41,7 +41,7 @@ def get_servicios_contratados():
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
-    return jsonify(result), 200
+    return(jsonify(result), 200)
 
 
 @servicios_contratados_blueprint.route("/api/v1/servicios_contratados/<int:serv_cont_id>", methods=["GET"])

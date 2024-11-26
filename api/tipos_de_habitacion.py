@@ -43,7 +43,7 @@ def get_tipos():
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
-    return jsonify(result), 200
+    return(jsonify(result), 200)
 
 
 @tipos_de_habitacion_blueprint.route("/api/v1/tipos/<int:tipo_id>", methods=["GET"])
