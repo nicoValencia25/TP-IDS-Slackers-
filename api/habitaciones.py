@@ -43,26 +43,7 @@ def get_habitaciones():
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
-    response = []
-    for row in result:
-        response.append(
-            jsonify(
-                {
-                    "HabitacionID": row[0],
-                    "HotelID": row[1],
-                    "NumHabitacion": row[2],
-                    "Piso": row[3],
-                    "TipoDeHabitacion": row[4],
-                    "CantHuespedes": row[5],
-                    "Descripcion": row[6],
-                    "Superficie": row[7],
-                    "PrecioAdulto": row[8],
-                    "PrecioNiño": row[9],
-                }
-            )
-        )
-
-    return jsonify(response), 200
+    return jsonify(result), 200
 
 
 @habitaciones_blueprint.route("/api/v1/habitaciones/<int:hab_id>", methods=["GET"])
@@ -77,20 +58,7 @@ def get_habitacion_by_id(hab_id):
 
     result = result[0]
     return (
-        jsonify(
-            {
-                "HabitacionID": result[0],
-                "HotelID": result[1],
-                "NumHabitacion": result[2],
-                "Piso": result[3],
-                "TipoDeHabitacion": result[4],
-                "CantHuespedes": result[5],
-                "Descripcion": result[6],
-                "Superficie": result[7],
-                "PrecioAdulto": result[8],
-                "PrecioNiño": result[9],
-            }
-        ),
+        result,
         200,
     )
 
@@ -142,20 +110,6 @@ def delete_habitacion(hab_id):
         return jsonify({'error': str(e)}), 500
 
     result = result[0]
-    return (
-        jsonify(
-            {
-                "HabitacionID": hab_id,
-                "HotelID": result[1],
-                "NumHabitacion": result[2],
-                "Piso": result[3],
-                "TipoDeHabitacion": result[4],
-                "CantHuespedes": result[5],
-                "Descripcion": result[6],
-                "Superficie": result[7],
-                "PrecioAdulto": result[8],
-                "PrecioNiño": result[9],
-            }
-        ),
+    return (result,
         200,
     )

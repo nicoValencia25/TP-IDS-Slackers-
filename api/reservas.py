@@ -5,19 +5,19 @@ from api.db_utils import run_query
 reservas_blueprint = Blueprint('reservas_blueprint', __name__)
 
 QUERY_RESERVAS = """
-SELECT ReservaID, ReservaCreacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabitacionID, UsuarioID
+SELECT ReservaID, Creacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabitacionID, UsuarioID
 FROM Reservas
 """
 
 QUERY_RESERVA_BY_ID = """
-SELECT ReservaID, ReservaCreacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabitacionID, UsuarioID
+SELECT ReservaID, Creacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabitacionID, UsuarioID
 FROM Reservas
 WHERE ReservaID = :ReservaID
 """
 
 QUERY_RESERVA_ADD = """
-INSERT INTO Reservas (ReservaID, ReservaCreacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabitacionID, UsuarioID)
-VALUES (:ReservaID, :ReservaCreacion, :Desde, :Hasta, :CantNiños, :CantAdultos, :PrecioTotal, :HabitacionID, :UsuarioID)
+INSERT INTO Reservas (ReservaID, Creacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabitacionID, UsuarioID)
+VALUES (:ReservaID, :Creacion, :Desde, :Hasta, :CantNiños, :CantAdultos, :PrecioTotal, :HabitacionID, :UsuarioID)
 """
 
 QUERY_RESERVA_DELETE = """
@@ -44,25 +44,7 @@ def get_reservas():
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
-    response = []
-    for row in result:
-        response.append(
-            jsonify(
-                {
-                    "ReservaID": row[0],
-                    "ReservaCreacion": row[1],
-                    "NumHabitacion": row[2],
-                    "Hasta": row[3],
-                    "CantNiños": row[4],
-                    "CantAdultos": row[5],
-                    "PrecioTotal": row[6],
-                    "HabitacionID": row[7],
-                    "UsuarioID": row[8],
-                }
-            )
-        )
-
-    return jsonify(response), 200
+    return jsonify(result), 200
 
 
 @reservas_blueprint.route("/api/v1/reservas/<int:res_id>", methods=["GET"])
@@ -77,19 +59,7 @@ def get_reserva_by_id(res_id):
 
     result = result[0]
     return (
-        jsonify(
-            {
-                "ReservaID": result[0],
-                "ReservaCreacion": result[1],
-                "Desde": result[2],
-                "Hasta": result[3],
-                "CantNiños": result[4],
-                "CantAdultos": result[5],
-                "PrecioTotal": result[6],
-                "HabitacionID": result[7],
-                "UsuarioID": result[8],
-            }
-        ),
+        result,
         200,
     )
 
@@ -141,18 +111,6 @@ def delete_reserva(res_id):
 
     result = result[0]
     return (
-        jsonify(
-            {
-                "ReservaID": res_id,
-                "ReservaCreacion": result[1],
-                "Desde": result[2],
-                "Hasta": result[3],
-                "CantNiños": result[4],
-                "CantAdultos": result[5],
-                "PrecioTotal": result[6],
-                "HabitacionID": result[7],
-                "UsuarioID": result[8],
-            }
-        ),
+        result,
         200,
     )
