@@ -1,22 +1,30 @@
 from flask import Flask, render_template, request, redirect
-from api.reservas import reservas_blueprint
+
 from api.habitaciones import habitaciones_blueprint
+from api.hoteles import hoteles_blueprint
+from api.img_habitaciones import img_habitaciones_blueprint
+from api.img_hoteles import img_hoteles_blueprint
+from api.reservas import reservas_blueprint
+from api.servicios import servicios_blueprint
+from api.servicios_contratados import servicios_contratados_blueprint
+from api.tipos_de_habitacion import tipos_de_habitacion_blueprint
+from api.usuarios import usuarios_blueprint
+
 import requests
 
-API_URL = 'http://localhost:5000/api/v1/'
+API_URL = 'https://juanbarbieri.pythonanywhere.com/api/v1/'
 
 app = Flask(__name__)
 
-"""app.secret_key = "clave_secreta"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://juanbarbieri:Ei3_VskCP_nnnmT@juanbarbieri.mysql.pythonanywhere-services.com/juanbarbieri$HotelDB'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Avoids a warning from SQLAlchemy
-
-db = SQLAlchemy()
-db.init_app(app)
-"""
-
-app.register_blueprint(reservas_blueprint)
 app.register_blueprint(habitaciones_blueprint)
+app.register_blueprint(hoteles_blueprint)
+app.register_blueprint(img_habitaciones_blueprint)
+app.register_blueprint(img_hoteles_blueprint)
+app.register_blueprint(reservas_blueprint)
+app.register_blueprint(servicios_blueprint)
+app.register_blueprint(servicios_contratados_blueprint)
+app.register_blueprint(tipos_de_habitacion_blueprint)
+app.register_blueprint(usuarios_blueprint)
 
 @app.route('/')
 def home():
