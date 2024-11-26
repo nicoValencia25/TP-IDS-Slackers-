@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tp_ids.hoteles.R
 
-class HotelAdapter(var hotels: List<Hotel>) : RecyclerView.Adapter<HotelViewHolder>() {
+class HotelAdapter(private val hotels: List<Hotel>, private val onTaskSelected: (Int) -> Unit) : RecyclerView.Adapter<HotelViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_hotel, parent, false)
@@ -16,5 +16,6 @@ class HotelAdapter(var hotels: List<Hotel>) : RecyclerView.Adapter<HotelViewHold
 
     override fun onBindViewHolder(holder: HotelViewHolder, position: Int) {
         holder.render(hotels[position])
+        holder.btnHotel.setOnClickListener { onTaskSelected(hotels[position].id) }
     }
 }

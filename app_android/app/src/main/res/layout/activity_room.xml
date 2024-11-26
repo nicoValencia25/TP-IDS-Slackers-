@@ -10,7 +10,7 @@
     tools:context=".hotel.HotelActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvHotel"
+        android:id="@+id/rvRoom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

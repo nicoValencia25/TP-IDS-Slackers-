@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">hoteles</string>
+
     <string name="hotel_button">Habitaciones</string>
+
+    <string name="room_button">Reservar</string>
+    <string name="room_guests">Huespedes: </string>
 </resources>

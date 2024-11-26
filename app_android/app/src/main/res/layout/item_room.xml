@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="@color/background_recycler_view"
+    app:cardCornerRadius="36dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvRoomName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:textColor="@color/room_name_color"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Habitación de hotel" />
+
+        <ImageView
+            android:id="@+id/ivRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            tools:src="@android:drawable/bottom_bar" />
+
+        <TextView
+            android:id="@+id/tvRoomDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:textColor="@color/room_description_color"
+            android:textSize="16sp"
+            tools:text="Descripcion:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non mattis odio. Duis pellentesque diam at lacus convallis laoreet. Sed ut est arcu. Fusce non consectetur nunc. Nunc in lectus sodales, sagittis sem in, consequat turpis. Pellentesque consectetur leo sed magna pellentesque, sit amet commodo est commodo. Praesent justo enim, ornare id interdum sed, vehicula et ipsum. Aenean sit amet ultricies ipsum, a varius quam. " />
+
+        <TextView
+            android:id="@+id/tvGuestsRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:textColor="@color/room_guests_color"
+            android:textSize="20sp"
+            tools:text="Huespedes: 10" />
+
+        <TextView
+            android:id="@+id/tvPriceAdultRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:textColor="@color/room_price_adult_color"
+            android:textSize="20sp"
+            tools:text="Precio Adulto: $10000" />
+
+        <TextView
+            android:id="@+id/tvPriceChildrenRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:textColor="@color/room_price_children_color"
+            android:textSize="20sp"
+            tools:text="Precio Niños: $2000000" />
+
+        <Button
+            android:id="@+id/btnRoom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="8dp"
+            android:backgroundTint="@color/room_button_color"
+            android:text="@string/room_button"
+            android:textColor="@color/room_button_text_color" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

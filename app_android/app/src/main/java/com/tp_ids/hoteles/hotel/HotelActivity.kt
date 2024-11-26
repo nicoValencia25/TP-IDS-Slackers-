@@ -1,5 +1,6 @@
 package com.tp_ids.hoteles.hotel
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tp_ids.hoteles.R
+import com.tp_ids.hoteles.room.RoomActivity
 
 class HotelActivity : AppCompatActivity() {
     private lateinit var hotels: MutableList<Hotel>
@@ -56,8 +58,14 @@ class HotelActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-        hotelAdapter = HotelAdapter(hotels)
+        hotelAdapter = HotelAdapter(hotels) { hotelID -> navigateToRoom(hotelID)}
         rvHotel.layoutManager = LinearLayoutManager(this)
         rvHotel.adapter = hotelAdapter
+    }
+
+    private fun navigateToRoom(hotelID: Int) {
+        val intent = Intent(this, RoomActivity::class.java)
+        intent.putExtra("hotelID", hotelID)
+        startActivity(intent)
     }
 }
