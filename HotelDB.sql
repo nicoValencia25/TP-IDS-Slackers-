@@ -165,13 +165,13 @@ LOCK TABLES `Reservas` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ServicioContratado`
+-- Table structure for table `ServiciosContratados`
 --
 
-DROP TABLE IF EXISTS `ServicioContratado`;
+DROP TABLE IF EXISTS `ServiciosContratados`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ServicioContratado` (
+CREATE TABLE `ServiciosContratados` (
   `ServicioContratadoID` int NOT NULL AUTO_INCREMENT,
   `Creacion` datetime NOT NULL,
   `PrecioTotal` int NOT NULL,
@@ -180,18 +180,18 @@ CREATE TABLE `ServicioContratado` (
   PRIMARY KEY (`ServicioContratadoID`,`ServicioID`,`ReservaID`),
   KEY `ServicioID` (`ServicioID`),
   KEY `ReservaID` (`ReservaID`),
-  CONSTRAINT `ServicioContratado_ibfk_1` FOREIGN KEY (`ServicioID`) REFERENCES `Servicios` (`ServicioID`),
-  CONSTRAINT `ServicioContratado_ibfk_2` FOREIGN KEY (`ReservaID`) REFERENCES `Reservas` (`ReservaID`)
+  CONSTRAINT `ServiciosContratados_ibfk_1` FOREIGN KEY (`ServicioID`) REFERENCES `Servicios` (`ServicioID`),
+  CONSTRAINT `ServiciosContratados_ibfk_2` FOREIGN KEY (`ReservaID`) REFERENCES `Reservas` (`ReservaID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ServicioContratado`
+-- Dumping data for table `ServiciosContratados`
 --
 
-LOCK TABLES `ServicioContratado` WRITE;
-/*!40000 ALTER TABLE `ServicioContratado` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ServicioContratado` ENABLE KEYS */;
+LOCK TABLES `ServiciosContratados` WRITE;
+/*!40000 ALTER TABLE `ServiciosContratados` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ServiciosContratados` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
