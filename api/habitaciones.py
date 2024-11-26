@@ -5,19 +5,19 @@ from api.db_utils import run_query
 habitaciones_blueprint = Blueprint('habitaciones_blueprint', __name__)
 
 QUERY_HABITACIONES = """
-SELECT HabitacionID, HotelID, NumHabitacion, Piso, TipoDeHabitacion, CantHuespedes, Descripcion, Superficie, PrecioAdulto, PrecioNiño
+SELECT HabitacionID, TipoID, Piso, NumHabitacion
 FROM Habitaciones
 """
 
 QUERY_HABITACION_BY_ID = """
-SELECT HabitacionID, HotelID, NumHabitacion, Piso, TipoDeHabitacion, CantHuespedes, Descripcion, Superficie, PrecioAdulto, PrecioNiño
+SELECT HabitacionID, TipoID, Piso, NumHabitacion
 FROM Habitaciones
 WHERE HabitacionID = :HabitacionID
 """
 
 QUERY_HABITACION_ADD = """
-INSERT INTO Habitaciones (HabitacionID, HotelID, NumHabitacion, Piso, TipoDeHabitacion, CantHuespedes, Descripcion, Superficie, PrecioAdulto, PrecioNiño)
-VALUES (:HabitacionID, :HotelID, :NumHabitacion, :Piso, :TipoDeHabitacion, :CantHuespedes, :Descripcion, :Superficie, :PrecioAdulto, :PrecioNiño)
+INSERT INTO Habitaciones (HabitacionID, TipoID, Piso, NumHabitacion)
+VALUES (:HabitacionID, :TipoID, :Piso, :NumHabitacion)
 """
 
 QUERY_HABITACION_DELETE = """
@@ -69,15 +69,9 @@ def add_habitacion():
 
     keys = (
         "HabitacionID",
-        "HotelID",
-        "NumHabitacion",
-        "Piso",
-        "TipoDeHabitacion",
-        "CantHuespedes",
-        "Descripcion",
-        "Superficie",
-        "PrecioAdulto",
-        "PrecioNiño"
+        "TipoID", 
+        "Piso", 
+        "NumHabitacion"
     )
 
     for key in keys:
