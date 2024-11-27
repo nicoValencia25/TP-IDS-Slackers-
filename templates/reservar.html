@@ -7,15 +7,16 @@
 
 
 
+
     <div class="contenedor_info">
-        <h2 class="texto_info_titulo"> Hotel(nombre) </h2>
 
+        <h2 class="texto_info_titulo"> {{ hotel.Nombre }} </h2>
+        <h5 class="texto_info" style="color: #72a522">{{ hotel.Direccion }}</h5>
+        <h5 class="texto_info" style="color: #72a522">{{ hotel.Localidad }}</h5>
+        <p class="texto_info">{{ hotel.Descripcion }}</p>
 
-
-
-        <h5 class="texto_info">(ubicacion del hotel)</h5>
-        <p class="texto_info">descripcion del hotel: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed magna quis enim elementum suscipit. Nullam vulputate quam gravida sapien pellentesque bibendum sed at purus. Etiam quis erat maximus, condimentum tortor vitae, lacinia nibh. Integer porta lorem risus, sed interdum felis pellentesque ut. Nullam cursus nulla at enim scelerisque, a mattis nulla sodales. Aenean leo ipsum, varius ut elit eu.</p>
     </div>
+
 
  <img src="" class="imagen_info_hotel3" alt="">
     <div class="contenedor_info2">
@@ -110,11 +111,13 @@
 
 </div>
 
+
+
 <h2 class="titulo_actuales" style="margin-top: 70px">Realice su reserva</h2>
 <div class="contenedor_reserv_fin"  >
     <div class="contenedor_edit_reservas">
 
-        <form  class="formulario_reserva" action="{{ url_for('reservas')}}" method="POST">
+        <form  class="formulario_reserva" action="" method="POST">
 
             <label class="text_form_reserv" for="reserva_desde">Fecha de inicio de la reserva</label>
                 <input type="date" class="input_form_fechas" id="reserva_desde" name="reserva_desde">

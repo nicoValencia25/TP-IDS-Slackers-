@@ -51,24 +51,30 @@
 
     <h1 class="titulo_actuales">Hoteles disponibles en todo el pais</h1>
 
+
+
             <div class="contenedor_reser2">
              <h1 class="reservas_title"></h1>
+        {% for hotel in hoteles %}
         <!-- todas las reservas-->
         <div class="contenedor_reserva_unica">
-            <h3 class="reservas_cont"> Hotel 1 </h3>
+            <h3 class="reservas_cont">{{ hotel.Nombre }} </h3>
             <div class="info_lugar">
-                <p>el mejor hotel numero 1</p>
+                <p>{{ hotel.Localidad }}</p>
+                <p>{{ hotel.Provincia }}</p>
+                <p>{{ hotel.Direccion }}</p>
                 <img class="muestra" src="" alt="">
                 <div class="en_curso">
-                    <img class="mini_logo" src="/static/img/logo_mini.png" alt="">
+                    <img class="mini_logo" src="{{ url_for('static',filename='img/logo_mini.png') }}" alt="">
                     <p class="mini_txt">Disponible</p>
                 </div>
 
 
             </div>
-            <button onclick="location.href='reservar'" class="reservar_ahora">Reservar ahora</button>
+            <button type="button" onclick="location.href='{{ url_for('book_hotel',HotelID=hotel.HotelID,_external=True) }}'" class="reservar_ahora">Reservar ahora</button>
 
         </div>
+            {% endfor %}
         </div>
 
 

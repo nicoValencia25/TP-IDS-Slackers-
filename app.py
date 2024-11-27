@@ -58,7 +58,10 @@ def book():
         response = requests.get(API_URL + 'hoteles')
         response.raise_for_status()
         hoteles = response.json()
-        return render_template('booking.html', hoteles=hoteles)
+        response_img = requests.get(API_URL + 'img_hoteles')
+        response_img.raise_for_status()
+        imagenes = response_img.json()
+        return render_template('booking.html', hoteles=hoteles, imagenes=imagenes)
 
 
 @app.route('/habitaciones/<string:hotel>')
@@ -66,8 +69,17 @@ def habitaciones(hotel):
     
     return render_template('habitaciones.html', hotel=hotel)
 
+@app.route('/book/<HotelID>')
+def book_hotel(HotelID):
+
+        response = requests.get(API_URL + 'hoteles/'+HotelID)
+        response.raise_for_status()
+        hotel = response.json()
+        return render_template('reservar.html', hotel=hotel)
+
+
 @app.route('/reservar/<string:hotel>/<string:habitacion>')
-def reservar(habitacion):
+def reservar2(habitacion):
     
     return render_template('reservar.html', habitacion=habitacion)
 
@@ -97,14 +109,7 @@ def contacto():
     return render_template('contact.html')
 
 
-@app.route('/reservar')
-def reservar_hotel():
-    if request.method == 'POST':
-        inicio = request.form.get('reserva_desde')
-        fin = request.form.get('reserva_hasta')
-        habitacion_id = request.form.get('habitacion_id')
-        adultos = request.form.get('cantidad_de_adultos')
-        ninos = request.form.get('cantidad_de_ninos')
+
 
 
 @app.route('/iniciar_sesion')
@@ -138,4 +143,4 @@ def testimonial():
     return render_template('testimonial.html')
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)

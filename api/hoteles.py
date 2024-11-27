@@ -43,7 +43,7 @@ def get_hoteles():
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
-    return(jsonify(result), 200)
+    return jsonify(result), 200
 
 
 @hoteles_blueprint.route("/api/v1/hoteles/<int:hotel_id>", methods=["GET"])

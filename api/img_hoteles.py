@@ -43,7 +43,7 @@ def get_img_hoteles():
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
-    return(jsonify(result), 200)
+    return jsonify(result), 200
 
 
 @img_hoteles_blueprint.route("/api/v1/img_hoteles/<int:img_hotel_id>", methods=["GET"])
