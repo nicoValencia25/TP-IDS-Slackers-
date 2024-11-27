@@ -58,9 +58,11 @@ def book():
         response = requests.get(API_URL + 'hoteles')
         response.raise_for_status()
         hoteles = response.json()
+
         response_img = requests.get(API_URL + 'img_hoteles')
         response_img.raise_for_status()
         imagenes = response_img.json()
+
         return render_template('booking.html', hoteles=hoteles, imagenes=imagenes)
 
 
@@ -75,7 +77,12 @@ def book_hotel(HotelID):
         response = requests.get(API_URL + 'hoteles/'+HotelID)
         response.raise_for_status()
         hotel = response.json()
-        return render_template('reservar.html', hotel=hotel)
+
+        respuesta = requests.get(API_URL + 'tipos_de_habitacion')
+        respuesta.raise_for_status()
+        habitacion = respuesta.json()
+
+        return render_template('reservar.html', hotel=hotel, habitacion=habitacion)
 
 
 @app.route('/reservar/<string:hotel>/<string:habitacion>')
@@ -83,7 +90,7 @@ def reservar2(habitacion):
     
     return render_template('reservar.html', habitacion=habitacion)
 
-@app.route('/reservas')
+@app.route('/reserva')
 def reservas():
     
     return render_template('reservas_act.html')
@@ -108,10 +115,6 @@ def contacto():
     
     return render_template('contact.html')
 
-
-
-
-
 @app.route('/iniciar_sesion')
 def iniciar_sesion():
     
@@ -126,11 +129,6 @@ def packages():
 def register():
     
     return render_template('register.html')
-
-@app.route('/services')
-def services():
-    
-    return render_template('services.html')
 
 @app.route('/team')
 def team():

@@ -826,6 +826,7 @@ background-color: #6610f2;
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 10px;
+    overflow: auto;
 
 
 }
@@ -838,6 +839,7 @@ background-color: #6610f2;
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
+    position: sticky;
 }
 th{
     padding-left: 30px;

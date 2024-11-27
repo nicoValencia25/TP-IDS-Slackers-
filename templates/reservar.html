@@ -31,75 +31,24 @@
                     <th>Tipo de Habitacion</th>
                     <th>Cantidad de Huespedes</th>
                     <th>Precio Adulto</th>
-                    <th>Precio Niño</th>
+
                     <th>Superficie</th>
-                    <th>ID</th>
+                    <th>Numero</th>
                 </tr>
                 </thead>
                 <tbody>
+                    {% for habit in habitaciones %}
                     <tr>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
+                        <td class="td_hab">{{ habit.Nombre }}</td>
+                        <td class="td_hab">{{ habit.CantHuespedes }}</td>
+                        <td class="td_hab">{{ habit.PrecioAdulto }}</td>
 
-
+                        <td class="td_hab">{{ habit.Superficie }}</td>
+                        <td class="td_hab">{{ habit.TipoID }}</td>
                     </tr>
-                <tr>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-
-
-                    </tr>
-                <tr>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-
-
-                    </tr>
-                <tr>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-
-
-                    </tr>
-                <tr>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-
-
-                    </tr>
-                <tr>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-                        <td class="td_hab">ejemplo</td>
-
-
-                    </tr>
-
-
+                    {% endfor %}
                 </tbody>
+
             </table>
     </div>
 
