@@ -42,7 +42,8 @@ def log():
             session['user'] = email
             return redirect('index')
         else:
-            return redirect('log')
+            error_message= "Usuario o contraseña incorrectos. Por favor, vuelta a intentarlo."
+            return render_template('error.html', error= error_message)
 
     return render_template('iniciar_sesion.html')
 
