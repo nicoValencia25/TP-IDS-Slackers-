@@ -28,7 +28,7 @@ QUERY_HOTELID_BY_HABID = """
 SELECT HotelID
 FROM TiposDeHabitacion
 INNER JOIN Habitaciones on Habitaciones.TipoID = TiposDeHabitacion.TipoID
-WHERE HabID = :HabID
+WHERE HabitacionID = :HabitacionID
 """
 
 def hoteles_all():
@@ -44,7 +44,7 @@ def hotel_delete(hotel_id):
     run_query(QUERY_HOTEL_DELETE, {'HotelID': hotel_id})
 
 def hotel_by_habid(hab_id):
-    return run_query(QUERY_HOTELID_BY_HABID, {"HabID": hab_id})
+    return run_query(QUERY_HOTELID_BY_HABID, {"HabitacionID": hab_id})
 
 @hoteles_blueprint.route("/api/v1/hoteles", methods=["GET"])
 def get_hoteles():

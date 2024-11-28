@@ -25,7 +25,7 @@ DELETE FROM Reservas WHERE ReservaID = :ReservaID
 """
 
 QUERY_RESERVA_BY_APELLIDO = """
-SELECT ReservaID, Creacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabID, Reservas.UsuarioID, Apellido 
+SELECT ReservaID, Creacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabitacionID, Reservas.UsuarioID, Apellido 
 FROM Reservas
 INNER JOIN Usuarios on Usuarios.UsuarioID = Reservas.UsuarioID
 WHERE Apellido = :Apellido and ReservaID = :ReservaID
