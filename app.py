@@ -73,7 +73,9 @@ def book():
         response_img.raise_for_status()
         imagenes = response_img.json()
 
-        return render_template('booking.html', hoteles=hoteles, imagenes=imagenes)
+        hoteles_imagenes = zip(hoteles, imagenes)
+
+        return render_template('booking.html', hoteles_imagenes=hoteles_imagenes)
 
 
 
