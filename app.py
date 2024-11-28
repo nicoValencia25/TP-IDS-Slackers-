@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 
 from api.habitaciones import habitaciones_blueprint
 from api.hoteles import hoteles_blueprint
@@ -15,6 +15,7 @@ import requests
 API_URL = 'https://juanbarbieri.pythonanywhere.com/api/v1/'
 
 app = Flask(__name__)
+app.secret_key = 'clave_secreta'
 
 app.register_blueprint(habitaciones_blueprint)
 app.register_blueprint(hoteles_blueprint)
@@ -121,9 +122,9 @@ def iniciar_sesion():
     return render_template('iniciar_sesion.html')
 
 @app.route('/packages')
-def packages():
+def package():
     
-    return render_template('packages.html')
+    return render_template('package.html')
 
 @app.route('/register')
 def register():

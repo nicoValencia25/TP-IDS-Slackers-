@@ -43,7 +43,7 @@ def get_usuarios():
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
-    return(jsonify(result), 200)
+    return jsonify(result), 200
 
 
 @usuarios_blueprint.route("/api/v1/usuarios/<int:user_id>", methods=["GET"])
