@@ -57,7 +57,7 @@ def get_tipos():
     return jsonify(result), 200
 
 
-@tipos_de_habitacion_blueprint.route("/api/v1/tipos_de_habitacion/<int:tipo_id>", methods=["GET"])
+@tipos_de_habitacion_blueprint.route("/api/v1/tipos_de_habitacion/<int:tipo_hotel_id>/<int:tipo_id>", methods=["GET"])
 def get_tipo_by_id(tipo_id):
     try:
         result = tipo_by_id(tipo_id)
