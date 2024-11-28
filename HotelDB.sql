@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `HotelDB` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `HotelDB` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `HotelDB`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
 --
@@ -32,7 +32,7 @@ CREATE TABLE `Habitaciones` (
   PRIMARY KEY (`HabitacionID`,`TipoID`),
   KEY `TipoID` (`TipoID`),
   CONSTRAINT `Habitaciones_ibfk_1` FOREIGN KEY (`TipoID`) REFERENCES `TiposDeHabitacion` (`TipoID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +63,7 @@ CREATE TABLE `Hoteles` (
   `Longitud` varchar(45) NOT NULL,
   `Latitud` varchar(45) NOT NULL,
   PRIMARY KEY (`HotelID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `ImgHabitaciones` (
   PRIMARY KEY (`ImgHabitacionID`,`TipoID`),
   KEY `TipoID` (`TipoID`),
   CONSTRAINT `ImgHabitaciones_ibfk_1` FOREIGN KEY (`TipoID`) REFERENCES `TiposDeHabitacion` (`TipoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +117,7 @@ CREATE TABLE `ImgHoteles` (
   PRIMARY KEY (`ImgHotelID`,`HotelID`),
   KEY `HotelID` (`HotelID`),
   CONSTRAINT `ImgHoteles_ibfk_1` FOREIGN KEY (`HotelID`) REFERENCES `Hoteles` (`HotelID`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,14 +145,14 @@ CREATE TABLE `Reservas` (
   `CantNiños` int DEFAULT NULL,
   `CantAdultos` int NOT NULL,
   `PrecioTotal` int NOT NULL,
-  `HabitacionID` int NOT NULL,
+  `HabID` int NOT NULL,
   `UsuarioID` int NOT NULL,
-  PRIMARY KEY (`ReservaID`,`HabitacionID`,`UsuarioID`),
-  KEY `HabitacionID` (`HabitacionID`),
+  PRIMARY KEY (`ReservaID`,`HabID`,`UsuarioID`),
+  KEY `HabID` (`HabID`),
   KEY `UsuarioID` (`UsuarioID`),
-  CONSTRAINT `Reservas_ibfk_1` FOREIGN KEY (`HabitacionID`) REFERENCES `Habitaciones` (`HabitacionID`),
+  CONSTRAINT `Reservas_ibfk_1` FOREIGN KEY (`HabID`) REFERENCES `Habitaciones` (`HabitacionID`),
   CONSTRAINT `Reservas_ibfk_2` FOREIGN KEY (`UsuarioID`) REFERENCES `Usuarios` (`UsuarioID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,17 +161,18 @@ CREATE TABLE `Reservas` (
 
 LOCK TABLES `Reservas` WRITE;
 /*!40000 ALTER TABLE `Reservas` DISABLE KEYS */;
+INSERT INTO `Reservas` VALUES (1,'2024-11-15 20:05:21','2025-01-14 00:00:00','2025-01-29 00:00:00',0,2,88650,6,3);
 /*!40000 ALTER TABLE `Reservas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ServiciosContratados`
+-- Table structure for table `ServicioContratado`
 --
 
-DROP TABLE IF EXISTS `ServiciosContratados`;
+DROP TABLE IF EXISTS `ServicioContratado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ServiciosContratados` (
+CREATE TABLE `ServicioContratado` (
   `ServicioContratadoID` int NOT NULL AUTO_INCREMENT,
   `Creacion` datetime NOT NULL,
   `PrecioTotal` int NOT NULL,
@@ -180,18 +181,18 @@ CREATE TABLE `ServiciosContratados` (
   PRIMARY KEY (`ServicioContratadoID`,`ServicioID`,`ReservaID`),
   KEY `ServicioID` (`ServicioID`),
   KEY `ReservaID` (`ReservaID`),
-  CONSTRAINT `ServiciosContratados_ibfk_1` FOREIGN KEY (`ServicioID`) REFERENCES `Servicios` (`ServicioID`),
-  CONSTRAINT `ServiciosContratados_ibfk_2` FOREIGN KEY (`ReservaID`) REFERENCES `Reservas` (`ReservaID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `ServicioContratado_ibfk_1` FOREIGN KEY (`ServicioID`) REFERENCES `Servicios` (`ServicioID`),
+  CONSTRAINT `ServicioContratado_ibfk_2` FOREIGN KEY (`ReservaID`) REFERENCES `Reservas` (`ReservaID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ServiciosContratados`
+-- Dumping data for table `ServicioContratado`
 --
 
-LOCK TABLES `ServiciosContratados` WRITE;
-/*!40000 ALTER TABLE `ServiciosContratados` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ServiciosContratados` ENABLE KEYS */;
+LOCK TABLES `ServicioContratado` WRITE;
+/*!40000 ALTER TABLE `ServicioContratado` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ServicioContratado` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -212,7 +213,7 @@ CREATE TABLE `Servicios` (
   PRIMARY KEY (`ServicioID`,`HotelID`),
   KEY `HotelID` (`HotelID`),
   CONSTRAINT `Servicios_ibfk_1` FOREIGN KEY (`HotelID`) REFERENCES `Hoteles` (`HotelID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +222,7 @@ CREATE TABLE `Servicios` (
 
 LOCK TABLES `Servicios` WRITE;
 /*!40000 ALTER TABLE `Servicios` DISABLE KEYS */;
-INSERT INTO `Servicios` VALUES (1,'Enlace con el aeropuerto','Traslados privados cómodos y puntuales entre el aeropuerto y el hotel, con vehículos modernos y aire acondicionado.',60000,'Hotel1/Servicios/Img1.jpg',1,'Único'),(2,'Servicio a la habitación','Disfruta de platos a la carta, refrescos, snacks y artículos de primera necesidad desde la comodidad de tu habitación las 24 horas. El precio solo incluye la disposición del personal',50000,'Hotel2/Servicios/Img1.jpg',2,'Por día'),(3,'Traslado aeropuerto-hotel','Olvidate del estrés al llegar. Ofrecemos traslados 24/7, asegurando que tu llegada y salida sean siempre puntuales y sin contratiempos.',100000,'Hotel2/Servicios/Img2.jpg',2,'Único'),(4,'Masajes','Relajate con masajes terapéuticos, desde sueco hasta descontracturante, para aliviar tensiones y mejorar tu bienestar físico y mental.',60000,'Hotel3/Servicios/Img1.jpg',3,'Por persona'),(5,'Gimnasio','Gimnasio totalmente equipado con máquinas de cardio, pesas y zona de estiramientos, además de entrenadores personales a tu disposición.',140000,'Hotel3/Servicios/Img2.jpg',3,'Por persona'),(6,'Gimnasio','Mantente activo durante tu estancia en nuestro gimnasio, que cuenta con equipos para ejercitarte a cualquier hora del día.',80000,'Hotel5/Servicios/Img1.jpg',5,'Por persona'),(7,'Spa','Relájate en nuestro spa con sauna, bañera de hidromasaje y solárium, diseñados para restaurar tu energía y bienestar.',120000,'Hotel5/Servicios/Img2.jpg',5,'Por persona'),(8,'Desayuno a la habitación','Comienza el día con un delicioso desayuno a la habitación, que incluye opciones como panadería fresca, frutas, café, jugos y platos calientes, todo servido directamente en tu puerta.',100000,'Hotel6/Servicios/Img1.jpg',6,'Por persona'),(9,'Traslado aeropuerto','Traslado para ir o volver del aeropuerto',50000,'Hotel8/Servicios/Img1.jpg',8,'Único'),(10,'Servicio a la habitación','Disfruta de la comodidad de recibir tu comida, bebida o artículos en la habitación las 24 horas. El servicio incluye solo el trabajo del personal, y los productos solicitados se cobran aparte.',35000,'Hotel10/Servicios/Img1.jpg',10,'Por día'),(11,'Spa','Disfruta de nuestro spa con sauna y baños de vapor, ideales para relajarte y revitalizarte en un ambiente tranquilo y acogedor.',100000,'Hotel10/Servicios/Img2.jpg',10,'Por persona'),(12,'Gimnasio','Accede a nuestro gimnasio con equipos de cardio y pesas para mantenerte en forma durante tu estancia. Un espacio cómodo y funcional, disponible para ti en cualquier momento del día.',100000,'Hotel10/Servicios/Img3.jpg',10,'Por persona'),(13,'Servicio a la Habitación','Disfruta de la comodidad de nuestro servicio a la habitación. Amplia variedad de platos y bebidas, disponibles las 24 horas.',50000,'Hotel7/Servicios/Img1.jpg',7,'Por día'),(14,'Gimnasio','Mantené tu rutina en forma mientras viajás. Nuestro gimnasio te ofrece todo lo que necesitás: máquinas de cardio, pesas libres y más. Perfecto para recargar energías',150000,'Hotel7/Servicios/Img2.jpg',7,'Por persona'),(15,'Zona de Spa','Nuestra zona de spa incluye sauna y bañera de hidromasaje, diseñados para ofrecerte comodidad y relajación en un entorno privado y exclusivo.',150000,'Hotel7/Servicios/Img3.jpg',7,'Por persona'),(16,'Parking Privado','Nuestro parking privado ofrece seguridad y comodidad, con plazas exclusivas para huéspedes. Acceso controlado y ubicado cerca del hotel para tu mayor tranquilidad y facilidad.',15000,'Hotel7/Servicios/Img4.jpg',7,'Por día');
+INSERT INTO `Servicios` VALUES (1,'Enlace con el aeropuerto','Traslados privados cómodos y puntuales entre el aeropuerto y el hotel, con vehículos modernos y aire acondicionado.',70000,'Hotel1/Servicios/Img1.jpg',1,'Único'),(2,'Servicio a la habitación','Disfruta de platos a la carta, refrescos, snacks y artículos de primera necesidad desde la comodidad de tu habitación las 24 horas. El precio solo incluye la disposición del personal',50000,'Hotel2/Servicios/Img1.jpg',2,'Por día'),(3,'Traslado aeropuerto-hotel','Olvidate del estrés al llegar. Ofrecemos traslados 24/7, asegurando que tu llegada y salida sean siempre puntuales y sin contratiempos.',100000,'Hotel2/Servicios/Img2.jpg',2,'Único'),(4,'Masajes','Relajate con masajes terapéuticos, desde sueco hasta descontracturante, para aliviar tensiones y mejorar tu bienestar físico y mental.',100000,'Hotel3/Servicios/Img1.jpg',3,'Por persona'),(5,'Gimnasio','Gimnasio totalmente equipado con máquinas de cardio, pesas y zona de estiramientos, además de entrenadores personales a tu disposición.',140000,'Hotel3/Servicios/Img2.jpg',3,'Por persona'),(6,'Desayuno buffet','Desayuno buffet: cereales, frutas frescas, jugos naturales, panes, croissants, yogures, quesos, embutidos, y opciones calientes como huevos y tocino.',100000,'Hotel4/Servicios/Img1.jpg',4,'Por persona'),(7,'Gimnasio','Mantente activo durante tu estancia en nuestro gimnasio, que cuenta con equipos para ejercitarte a cualquier hora del día.',100000,'Hotel5/Servicios/Img1.jpg',5,'Por persona'),(8,'Spa','Relájate en nuestro spa con sauna, bañera de hidromasaje y solárium, diseñados para restaurar tu energía y bienestar.',120000,'Hotel5/Servicios/Img2.jpg',5,'Por persona'),(9,'Desayuno a la habitación','Comienza el día con un delicioso desayuno a la habitación, que incluye opciones como panadería fresca, frutas, café, jugos y platos calientes, todo servido directamente en tu puerta.',130000,'Hotel6/Servicios/Img1.jpg',6,'Por persona'),(10,'Servicio a la Habitación','Disfruta de la comodidad de nuestro servicio a la habitación. Amplia variedad de platos y bebidas, disponibles las 24 horas.',50000,'Hotel7/Servicios/Img1.jpg',7,'Por día'),(11,'Gimnasio','Mantené tu rutina en forma mientras viajás. Nuestro gimnasio te ofrece todo lo que necesitás: máquinas de cardio, pesas libres y más. Perfecto para recargar energías',160000,'Hotel7/Servicios/Img2.jpg',7,'Por persona'),(12,'Zona de Spa','Nuestra zona de spa incluye sauna y bañera de hidromasaje, diseñados para ofrecerte comodidad y relajación en un entorno privado y exclusivo.',180000,'Hotel7/Servicios/Img3.jpg',7,'Por persona'),(13,'Parking Privado','Nuestro parking privado ofrece seguridad y comodidad, con plazas exclusivas para huéspedes. Acceso controlado y ubicado cerca del hotel para tu mayor tranquilidad y facilidad.',20000,'Hotel7/Servicios/Img4.jpg',7,'Por día'),(14,'Traslado aeropuerto','Traslado para ir o volver del aeropuerto',60000,'Hotel8/Servicios/Img1.jpg',8,'Único'),(15,'Desayuno buffet','Disfruta de un desayuno buffet con una amplia variedad de opciones para todos los gustos.',120000,'Hotel9/Servicios/Img1.jpg',9,'Por persona'),(16,'Conexión con el aeropuerto','El hotel ofrece servicio de traslado entre el aeropuerto y el hotel, disponible bajo solicitud previa.',80000,'Hotel9/Servicios/Img2.jpg',9,'Único'),(17,'Servicio a la habitación','Disfruta de la comodidad de recibir tu comida, bebida o artículos en la habitación las 24 horas. El servicio incluye solo el trabajo del personal, y los productos solicitados se cobran aparte.',35000,'Hotel10/Servicios/Img1.jpg',10,'Por día'),(18,'Spa','Disfruta de nuestro spa con sauna y baños de vapor, ideales para relajarte y revitalizarte en un ambiente tranquilo y acogedor.',130000,'Hotel10/Servicios/Img2.jpg',10,'Por persona'),(19,'Gimnasio','Accede a nuestro gimnasio con equipos de cardio y pesas para mantenerte en forma durante tu estancia. Un espacio cómodo y funcional, disponible para ti en cualquier momento del día.',110000,'Hotel10/Servicios/Img3.jpg',10,'Por persona');
 /*!40000 ALTER TABLE `Servicios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +245,7 @@ CREATE TABLE `TiposDeHabitacion` (
   PRIMARY KEY (`TipoID`,`HotelID`),
   KEY `HotelID` (`HotelID`),
   CONSTRAINT `TiposDeHabitacion_ibfk_1` FOREIGN KEY (`HotelID`) REFERENCES `Hoteles` (`HotelID`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +276,7 @@ CREATE TABLE `Usuarios` (
   `DNI` varchar(45) NOT NULL,
   `Pais` varchar(45) NOT NULL,
   PRIMARY KEY (`UsuarioID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,7 +285,7 @@ CREATE TABLE `Usuarios` (
 
 LOCK TABLES `Usuarios` WRITE;
 /*!40000 ALTER TABLE `Usuarios` DISABLE KEYS */;
-INSERT INTO `Usuarios` VALUES (1,'Mariano','Alvarez','2000-10-21','marianoalvarez@gmail.com','mariano2024','+54 11 2342-5398','41294180','Argentina');
+INSERT INTO `Usuarios` VALUES (1,'Mariano','Alvarez','2000-10-21','marianoalvarez@gmail.com','mariano2024','+54 11 2342-5398','41294180','Argentina'),(2,'Carlos','Alvarez','1989-05-23','alvarez099@gmail.com','carloscarlos099','+54 11 9384-1627','33738193','Argentina'),(3,'Gustavo','Perez','1992-02-21','gusti1992@gmail.com','gusti1992','+54 11 1539-9390','36902746','Argentina'),(4,'Alberto','Martinez','1970-10-23','alberto@gmail.com','albertoma123','+54 11 6542-5165','21133859','Argentina');
 /*!40000 ALTER TABLE `Usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -297,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-15 20:45:08
+-- Dump completed on 2024-11-27 21:10:21
