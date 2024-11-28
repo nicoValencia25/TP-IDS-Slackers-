@@ -23,7 +23,13 @@ VALUES (:ServicioContratadoID, :Creacion, :PrecioTotal, :ServicioID, :ReservaID)
 QUERY_SERVICIO_CONTRATADO_DELETE = """
 DELETE FROM ServiciosContratados WHERE ServicioContratadoID = :ServicioContratadoID
 """
-    
+
+QUERY_SERVICIOS_CONTRATADOS_BY_RESERVAID = """
+SELECT ServicioContratadoID, Creacion, PrecioTotal, ServicioID, ReservaID
+FROM ServiciosContratados 
+WHERE ReservaID = :ReservaID
+"""
+
 def servicios_contratados_all():
     return run_query(QUERY_SERVICIOS_CONTRATADOS)
 
@@ -35,7 +41,10 @@ def servicio_contratado_add(data):
 
 def servicio_contratado_delete(serv_cont_id):
     run_query(QUERY_SERVICIO_CONTRATADO_DELETE, {'ServicioContratadoID': serv_cont_id})
-    
+
+def servicios_contratados_by_reservaid(res_id):
+    return run_query(QUERY_SERVICIOS_CONTRATADOS_BY_RESERVAID, {"ReservaID": res_id})
+
 @servicios_contratados_blueprint.route("/api/v1/servicios_contratados", methods=["GET"])
 def get_servicios_contratados():
     try:
@@ -109,3 +118,15 @@ def delete_servicio_contratado(serv_cont_id):
         result,
         200,
     )
+
+@servicios_contratados_blueprint.route("/api/v1/servicios_contratados/reserva/<int:res_id>", methods=["GET"])
+def get_servicios_contratados_by_reservaid(res_id):
+    try:
+        result = servicios_contratados_by_reservaid(res_id)
+    except SQLAlchemyError as e:
+        return jsonify({"error": str(e)}), 500
+
+    if len(result) == 0:
+        return jsonify({"error": "No se encontró ningún servicio contratado para esa reserva"}), 404
+
+    return(jsonify(result), 200)
