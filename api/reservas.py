@@ -125,7 +125,7 @@ def delete_reserva(res_id):
         200,
     )
 
-@reservas_blueprint.route("/api/v1/reservas/<int:res_id>/<str:apellido>", methods=["GET"])
+@reservas_blueprint.route("/api/v1/reservas/<int:res_id>/<string:apellido>", methods=["GET"])
 def get_reserva_by_id_and_apellido(res_id, apellido):
     try:
         result = reserva_by_id_and_apellido(res_id, apellido)
