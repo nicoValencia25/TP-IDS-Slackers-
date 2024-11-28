@@ -103,13 +103,6 @@ def book_hotel(HotelID):
         return render_template('reservar.html', hotel=hotel, imagen=imagen, habitacion=habitacion)
 
 
-
-
-@app.route('/reservar/<string:hotel>/<string:habitacion>')
-def reservar2(habitacion):
-    
-    return render_template('reservar.html', habitacion=habitacion)
-
 @app.route('/reserva')
 def reservas():
     
@@ -135,21 +128,10 @@ def contacto():
     
     return render_template('contact.html')
 
-@app.route('/iniciar_sesion')
-def iniciar_sesion():
-    
-    return render_template('iniciar_sesion.html')
-
 @app.route('/packages')
 def package():
     
     return render_template('package.html')
-
-@app.route('/register')
-def register():
-    
-    return render_template('register.html')
-
 @app.route('/team')
 def team():
     
