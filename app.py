@@ -92,11 +92,15 @@ def book_hotel(HotelID):
         response.raise_for_status()
         hotel = response.json()
 
-        respuesta = requests.get(API_URL + 'tipos_de_habitacion')
-        respuesta.raise_for_status()
-        habitacion = respuesta.json()
+        img_response = requests.get(API_URL + 'img_hoteles/'+HotelID)
+        img_response.raise_for_status()
+        imagen = img_response.json()
 
-        return render_template('reservar.html', hotel=hotel, habitacion=habitacion)
+        hab_response = requests.get(API_URL + 'tipos_de_habitacion/'+HotelID)
+        hab_response.raise_for_status()
+        habitacion = hab_response.json()
+
+        return render_template('reservar.html', hotel=hotel, imagen=imagen, habitacion=habitacion)
 
 
 

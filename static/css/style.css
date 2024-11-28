@@ -774,11 +774,13 @@ background-color: #6610f2;
 
 .contenedor_info{
     background-color: #FFFFFF;
-    float: left;
-    width: 715px;
+    float: right;
+    width: 1100px;
     margin-top: 0px;
-    margin-left: 0px;
+    margin-left: 20px;
     border-radius: 1rem;
+    margin-bottom: 20px;
+    padding: 10px;
 
 }
 
@@ -828,6 +830,7 @@ background-color: #6610f2;
     margin-right: 10px;
     margin-bottom: 10px;
     overflow: auto;
+    height: 500px;
 
 
 }
@@ -841,6 +844,8 @@ background-color: #6610f2;
     align-items: center;
     justify-content: center;
     position: sticky;
+    top: 0;
+    left: 0;
 }
 th{
     padding-left: 30px;
@@ -854,6 +859,16 @@ th{
     background-color: #FFFFFF;
     color: #6610f2;
 }
+.td_hab_l{
+     padding: 15px;
+    border-bottom: solid 1px #6610f2;
+    border-right: solid 1px #6610f2;
+    background-color: #FFFFFF;
+    color: #6610f2;
+}
+.th_l{
+    padding-right: 10px;
+}
 
 .texto_info_titulo_tabla{
     margin-top: 20px;
@@ -864,19 +879,22 @@ th{
 .contenedor_info2{
     background-color: #FFFFFF;
     float: right;
-    width: 1110px;
+    width: 100%;
     justify-content: center;
     border-radius: 1rem;
+    margin-right: -15px;
 }
 
 .imagen_info_hotel2{
      width: 600px;
     height: 300px;
     margin-top: 20px;
-    margin-left: 47px;
+    margin-left: 40px;
     margin-bottom: 20px;
     margin-right: 47px;
-    float: right;
+    border-radius: 16px;
+    float: left;
+
 }
 
 .mapa_reserva{

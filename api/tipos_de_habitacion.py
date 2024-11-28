@@ -23,6 +23,13 @@ VALUES (:TipoID, :Nombre, :CantHuespedes, :Superficie, :HotelID, :Descripcion, :
 QUERY_TIPO_DELETE = """
 DELETE FROM TiposDeHabitacion WHERE TipoID = :TipoID
 """
+
+
+QUERY_TIPO_BY_HOTEL = """
+SELECT TipoID, Nombre, CantHuespedes, Superficie, HotelID, Descripcion, PrecioAdulto, PrecioNiño
+FROM TiposDeHabitacion
+WHERE HotelID = :HotelID
+"""
     
 def tipos_all():
     return run_query(QUERY_TIPOS)
@@ -35,6 +42,10 @@ def tipo_add(data):
 
 def tipo_delete(tipo_id):
     run_query(QUERY_TIPO_DELETE, {'TipoID': tipo_id})
+
+
+def tipo_by_hotel(tipo_hotel_id):
+    return run_query(QUERY_TIPO_BY_HOTEL, {"HotelID": tipo_hotel_id})
     
 @tipos_de_habitacion_blueprint.route("/api/v1/tipos_de_habitacion", methods=["GET"])
 def get_tipos():
@@ -106,6 +117,24 @@ def delete_tipo(tipo_id):
 
     except SQLAlchemyError as e:
         return jsonify({'error': str(e)}), 500
+
+    result = result[0]
+    return (
+        result,
+        200,
+    )
+
+
+
+@tipos_de_habitacion_blueprint.route("/api/v1/tipos_de_habitacion/<int:tipo_hotel_id>", methods=["GET"])
+def get_tipo_by_hotel(tipo_hotel_id):
+    try:
+        result = tipo_by_hotel(tipo_hotel_id)
+    except SQLAlchemyError as e:
+        return jsonify({"error": str(e)}), 500
+
+    if len(result) == 0:
+        return jsonify({"error": "No se encontró ningún tipo"}), 404
 
     result = result[0]
     return (

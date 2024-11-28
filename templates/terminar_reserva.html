@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2 class="titulo_actuales" style="margin-top: 70px">Realice su reserva</h2>
+<div class="contenedor_reserv_fin"  >
+    <div class="contenedor_edit_reservas">
+
+        <form  class="formulario_reserva" action="" method="POST">
+
+            <label class="text_form_reserv" for="reserva_desde">Fecha de inicio de la reserva</label>
+                <input type="date" class="input_form_fechas" id="reserva_desde" name="reserva_desde">
+
+
+
+            <label class="text_form_reserv" for="reserva_hasta">Fecha de finalizacion de la reserva</label>
+                <input type="date" class="input_form_fechas" id="reserva_hasta" name="reserva_hasta">
+
+
+            <label class="text_form_reserv" for="habitacion_id">Tipo de Habitacion (ID)</label>
+                <input type="number" class="input_form" id="habitacion_id" name="habitacion_id">
+
+
+            <label class="text_form_reserv" for="adultos"> Cantidad de adultos</label>
+            <input class="input_form" type="number" id="cantidad_de_adultos" name="cantidad_de_adultos">
+
+            <label class="text_form_reserv" for="niños"> Cantidad de niños</label>
+            <input class="input_form" type="number" id="cantidad_de_niños" name="cantidad_de_niños">
+
+
+        <button type="submit" class="boton_confirmar">Confirmar reserva</button>
+    </form>
+    </div>
+<div class="cont_precio_final">
+    <h3 class="titulo_precio_final">Precio Final</h3>
+    <p class="precio_final">$00000/0000USD</p>
+
+</div>
+<img class="below_pf" src="/static/img/destination-3.jpg" alt="">
+
+
+</div>
+
+{% endblock %}
