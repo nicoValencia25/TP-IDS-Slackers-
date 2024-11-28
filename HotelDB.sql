@@ -145,12 +145,12 @@ CREATE TABLE `Reservas` (
   `CantNiños` int DEFAULT NULL,
   `CantAdultos` int NOT NULL,
   `PrecioTotal` int NOT NULL,
-  `HabID` int NOT NULL,
+  `HabitacionID` int NOT NULL,
   `UsuarioID` int NOT NULL,
-  PRIMARY KEY (`ReservaID`,`HabID`,`UsuarioID`),
-  KEY `HabID` (`HabID`),
+  PRIMARY KEY (`ReservaID`,`HabitacionID`,`UsuarioID`),
+  KEY `HabID` (`HabitacionID`),
   KEY `UsuarioID` (`UsuarioID`),
-  CONSTRAINT `Reservas_ibfk_1` FOREIGN KEY (`HabID`) REFERENCES `Habitaciones` (`HabitacionID`),
+  CONSTRAINT `Reservas_ibfk_1` FOREIGN KEY (`HabitacionID`) REFERENCES `Habitaciones` (`HabitacionID`),
   CONSTRAINT `Reservas_ibfk_2` FOREIGN KEY (`UsuarioID`) REFERENCES `Usuarios` (`UsuarioID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -298,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-27 21:10:21
+-- Dump completed on 2024-11-27 21:56:15
