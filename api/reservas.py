@@ -24,6 +24,13 @@ QUERY_RESERVA_DELETE = """
 DELETE FROM Reservas WHERE ReservaID = :ReservaID
 """
 
+QUERY_RESERVA_BY_APELLIDO = """
+SELECT ReservaID, Creacion, Desde, Hasta, CantNiños, CantAdultos, PrecioTotal, HabID, Reservas.UsuarioID, Apellido 
+FROM Reservas
+INNER JOIN Usuarios on Usuarios.UsuarioID = Reservas.UsuarioID
+WHERE Apellido = :Apellido and ReservaID = :ReservaID
+"""
+
 def reservas_all():
     return run_query(QUERY_RESERVAS)
 
@@ -36,7 +43,10 @@ def reserva_add(data):
 
 def reserva_delete(res_id):
     run_query(QUERY_RESERVA_DELETE, {'ReservaID': res_id})
-    
+
+def reserva_by_id_and_apellido(res_id, apellido):
+    return run_query(QUERY_RESERVA_BY_APELLIDO, {'ReservaID': res_id, 'Apellido': apellido})
+
 @reservas_blueprint.route("/api/v1/reservas", methods=["GET"])
 def get_reservas():
     try:
@@ -108,6 +118,22 @@ def delete_reserva(res_id):
 
     except SQLAlchemyError as e:
         return jsonify({'error': str(e)}), 500
+
+    result = result[0]
+    return (
+        result,
+        200,
+    )
+
+@reservas_blueprint.route("/api/v1/reservas/<int:res_id>/<str:apellido>", methods=["GET"])
+def get_reserva_by_id_and_apellido(res_id, apellido):
+    try:
+        result = reserva_by_id_and_apellido(res_id, apellido)
+    except SQLAlchemyError as e:
+        return jsonify({"error": str(e)}), 500
+
+    if len(result) == 0:
+        return jsonify({"error": "No se encontró ninguna reserva, para ese apellido"}), 404
 
     result = result[0]
     return (

@@ -23,7 +23,14 @@ VALUES (:HotelID, :Nombre, :Provincia, :HotelID, :Descripcion, :Direccion, :Codi
 QUERY_HOTEL_DELETE = """
 DELETE FROM Hoteles WHERE HotelID = :HotelID
 """
-    
+
+QUERY_HOTELID_BY_HABID = """
+SELECT HotelID
+FROM TiposDeHabitacion
+INNER JOIN Habitaciones on Habitaciones.TipoID = TiposDeHabitacion.TipoID
+WHERE HabID = :HabID
+"""
+
 def hoteles_all():
     return run_query(QUERY_HOTELES)
 
@@ -35,7 +42,10 @@ def hotel_add(data):
 
 def hotel_delete(hotel_id):
     run_query(QUERY_HOTEL_DELETE, {'HotelID': hotel_id})
-    
+
+def hotel_by_habid(hab_id):
+    return run_query(QUERY_HOTELID_BY_HABID, {"HabID": hab_id})
+
 @hoteles_blueprint.route("/api/v1/hoteles", methods=["GET"])
 def get_hoteles():
     try:
@@ -108,6 +118,22 @@ def delete_hotel(hotel_id):
 
     except SQLAlchemyError as e:
         return jsonify({'error': str(e)}), 500
+
+    result = result[0]
+    return (
+        result,
+        200,
+    )
+
+@hoteles_blueprint.route("/api/v1/hoteles/habitacion/<int:hab_id>", methods=["GET"])
+def get_hotel_by_habid(hab_id):
+    try:
+        result = hotel_by_habid(hab_id)
+    except SQLAlchemyError as e:
+        return jsonify({"error": str(e)}), 500
+
+    if len(result) == 0:
+        return jsonify({"error": "No se encontró ningún hotel que tenga esa habitación"}), 404
 
     result = result[0]
     return (

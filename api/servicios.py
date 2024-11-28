@@ -23,7 +23,13 @@ VALUES (:ServicioID, :Nombre, :Precio, :ImgServicio, :HotelID, :Descripcion, :Ti
 QUERY_SERVICIO_DELETE = """
 DELETE FROM Servicios WHERE ServicioID = :ServicioID
 """
-    
+
+QUERY_SERVICIO_BY_HOTELID = """
+SELECT ServicioID, Nombre, Precio, ImgServicio, HotelID, Descripcion, TipoDePago
+FROM Servicios
+WHERE HotelID = :HotelID
+"""
+
 def servicios_all():
     return run_query(QUERY_SERVICIOS)
 
@@ -35,7 +41,10 @@ def servicio_add(data):
 
 def servicio_delete(hab_id):
     run_query(QUERY_SERVICIO_DELETE, {'ServicioID': hab_id})
-    
+
+def servicio_by_hotelid(hotel_id):
+    return run_query(QUERY_SERVICIO_BY_HOTELID, {"HotelID": hotel_id})
+
 @servicios_blueprint.route("/api/v1/servicios", methods=["GET"])
 def get_servicios():
     try:
@@ -105,3 +114,15 @@ def delete_servicio(hab_id):
 
     result = result[0]
     return (result, 200)
+
+@servicios_blueprint.route("/api/v1/servicios/hotel/<int:hotel_id>", methods=["GET"])
+def get_servicio_by_hotelid(hotel_id):
+    try:
+        result = servicio_by_hotelid(hotel_id)
+    except SQLAlchemyError as e:
+        return jsonify({"error": str(e)}), 500
+
+    if len(result) == 0:
+        return jsonify({"error": "No se encontró ningún servicio, en ese hotel"}), 404
+
+    return(jsonify(result), 200)
