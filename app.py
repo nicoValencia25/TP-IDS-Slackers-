@@ -77,14 +77,6 @@ def book():
 
         return render_template('booking.html', hoteles_imagenes=hoteles_imagenes)
 
-
-
-
-@app.route('/habitaciones/<string:hotel>')
-def habitaciones(hotel):
-    
-    return render_template('habitaciones.html', hotel=hotel)
-
 @app.route('/book/<HotelID>')
 def book_hotel(HotelID):
 
@@ -102,6 +94,16 @@ def book_hotel(HotelID):
 
         return render_template('reservar.html', hotel=hotel, imagen=imagen, habitacion=habitacion)
 
+
+@app.route('/seleccion_habitacion')  #aca falta un /<HotelID>/<TipoID>
+def seleccion_habitacion():
+
+    return render_template('seleccion_habitacion.html')
+
+@app.route('/terminar_reserva') #aca se deberia finalizar la reserva mandando al back los datos que sean solicitados
+def terminar_reserva():
+
+    return render_template('terminar_reserva.html')
 
 @app.route('/reserva')
 def reservas():

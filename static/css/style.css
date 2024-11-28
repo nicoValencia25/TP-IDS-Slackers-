@@ -834,6 +834,15 @@ background-color: #6610f2;
 
 
 }
+.tabla_habitaciones_2{
+     border: solid 1px #0d6efd;
+    table-layout: fixed;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    overflow: auto;
+
+}
 
 .thead_hab{
     background-color: #6610f2;
@@ -876,6 +885,13 @@ th{
     margin-left: 47px;
 }
 
+.texto_info_titulo_tabla2{
+    margin-top: 20px;
+    width: 500px;
+    margin-left: 47px;
+    padding-left: 170px;
+}
+
 .contenedor_info2{
     background-color: #FFFFFF;
     float: right;
@@ -883,6 +899,15 @@ th{
     justify-content: center;
     border-radius: 1rem;
     margin-right: -15px;
+}
+
+.contenedor_info2_2{
+    background-color: #FFFFFF;
+    width: 50%;
+    margin-left: 550px;
+    justify-content: center;
+    border-radius: 1rem;
+
 }
 
 .imagen_info_hotel2{
@@ -919,7 +944,7 @@ th{
 .formulario_reserva{
     width: 420px;
     background-color: #FFFFFF;
-    height: 600px;
+    height: 520px;
     margin: 20px;
     border-radius: 10px;
     border: solid 1px #0d6efd;

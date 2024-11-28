@@ -1,4 +1,35 @@
 {% extends 'base.html' %}
 {% block body %}
 
+
+    <div class="contenedor_info2_2">
+            <h3 class="texto_info_titulo_tabla2">Tipos de Habitaciones</h3>
+
+
+            <table class="tabla_habitaciones_2">
+                <thead class="thead_hab">
+                <tr>
+                    <th class="th_l">Tipo de Habitacion</th>
+                    <th class="th_l">Numero de Habitacion</th>
+                    <th>Piso</th>
+                    <th>Seleccionar</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                    {% for tipo in tipos %}
+                    <tr>
+                        <td class="td_hab_l">{{ tipo.TipoID }}</td>
+                        <td class="td_hab_l">{{ habit.NumHabitacion }}</td>
+                        <td class="td_hab">{{ habit.Piso }}</td>
+                        <td class="td_hab">IR</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+    </div>
+
+
+
 {% endblock %}
