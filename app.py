@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, url_for
 
 from api.habitaciones import habitaciones_blueprint
 from api.hoteles import hoteles_blueprint
@@ -29,6 +29,8 @@ app.register_blueprint(usuarios_blueprint)
 
 @app.route('/')
 def home():
+    if 'userid' not in session:
+        return render_template('iniciar_sesion.html')
     return render_template('index.html')
 
 
@@ -36,17 +38,24 @@ def home():
 def log():
     if request.method == 'POST':
         username = request.form.get('nombre')
-        userlname = request.form.get('apellido')
-        password = request.form.get('contraseña')
-        email = request.form.get('email')
-        if email in users and users[email] == password:
-            session['user'] = email
-            return redirect('index')
-        else:
-            error_message= "Usuario o contraseña incorrectos. Por favor, vuelta a intentarlo."
-            return render_template('error.html', error= error_message)
+        userid = request.form.get('user_id')
+        password = request.form.get('password')
+        response = requests.get(API_URL + 'usuarios/'+userid)
+        response.raise_for_status()
+        usuario_base = response.json()
 
-    return render_template('iniciar_sesion.html')
+        if  (user for user in usuario_base if user[1] == password and user[5] == username):
+            session['userid'] = userid
+            return redirect(url_for('home'))
+        else:
+            return render_template('iniciar_sesion.html')
+
+
+
+@app.route('/logout')
+def logout():
+    session.pop('userid', None)
+    return redirect(url_for('home'))
 
 @app.route('/dest')
 def dest():
@@ -67,6 +76,8 @@ def book():
         return render_template('booking.html', hoteles=hoteles, imagenes=imagenes)
 
 
+
+
 @app.route('/habitaciones/<string:hotel>')
 def habitaciones(hotel):
     
@@ -84,6 +95,8 @@ def book_hotel(HotelID):
         habitacion = respuesta.json()
 
         return render_template('reservar.html', hotel=hotel, habitacion=habitacion)
+
+
 
 
 @app.route('/reservar/<string:hotel>/<string:habitacion>')
