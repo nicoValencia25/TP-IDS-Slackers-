@@ -10,9 +10,10 @@ FROM TiposDeHabitacion
 """
 
 QUERY_TIPO_BY_ID = """
-SELECT TipoID, Nombre, CantHuespedes, Superficie, HotelID, Descripcion, PrecioAdulto, PrecioNiño
+SELECT TipoID, Nombre, CantHuespedes, Superficie, TiposDeHabitacion.HotelID, Descripcion, PrecioAdulto, PrecioNiño
 FROM TiposDeHabitacion
-WHERE TipoID = :TipoID
+INNER JOIN Hoteles on Hoteles.HotelID = TiposDeHabitacion.HotelID
+WHERE TipoID = :TipoID and HotelID = :HotelID
 """
 
 QUERY_TIPO_ADD = """
@@ -34,8 +35,8 @@ WHERE HotelID = :HotelID
 def tipos_all():
     return run_query(QUERY_TIPOS)
 
-def tipo_by_id(tipo_id):
-    return run_query(QUERY_TIPO_BY_ID, {"TipoID": tipo_id})
+def tipo_by_id(tipo_id, hotel_id):
+    return run_query(QUERY_TIPO_BY_ID, {"TipoID": tipo_id, "HotelID": hotel_id})
 
 def tipo_add(data):
     run_query(QUERY_TIPO_ADD, data)
@@ -57,10 +58,10 @@ def get_tipos():
     return jsonify(result), 200
 
 
-@tipos_de_habitacion_blueprint.route("/api/v1/tipos_de_habitacion/<int:tipo_id>", methods=["GET"])
-def get_tipo_by_id(tipo_id):
+@tipos_de_habitacion_blueprint.route("/api/v1/tipos_de_habitacion/<int:hotel_id>/<int:tipo_id>", methods=["GET"])
+def get_tipo_by_id_and_hotel_id(tipo_id, hotel_id):
     try:
-        result = tipo_by_id(tipo_id)
+        result = get_tipo_by_id_and_hotel_id(tipo_id, hotel_id)
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
