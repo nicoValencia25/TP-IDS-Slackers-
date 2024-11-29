@@ -95,8 +95,9 @@ def book_hotel(HotelID):
         return render_template('reservar.html', hotel=hotel, imagen=imagen, habitacion=habitacion)
 
 
-@app.route('/seleccion_habitacion')  #aca falta un /<HotelID>/<TipoID>
-def seleccion_habitacion():
+@app.route('/habitaciones/<TipoID>')  #aca falta un /<HotelID>/<TipoID>
+def seleccion_habitacion(TipoID):
+    response =requests.get(API_URL + '/'+HotelID)
 
     return render_template('seleccion_habitacion.html')
 

@@ -12,7 +12,7 @@ FROM Habitaciones
 QUERY_HABITACION_BY_ID = """
 SELECT HabitacionID, TipoID, Piso, NumHabitacion
 FROM Habitaciones
-WHERE HabitacionID = :HabitacionID
+WHERE TipoID = :TipoID
 """
 
 QUERY_HABITACION_ADD = """
@@ -27,8 +27,8 @@ DELETE FROM Habitaciones WHERE HabitacionID = :HabitacionID
 def habitaciones_all():
     return run_query(QUERY_HABITACIONES)
 
-def habitacion_by_id(hab_id):
-    return run_query(QUERY_HABITACION_BY_ID, {"HabitacionID": hab_id})
+def habitacion_by_id(tipo_hab_id):
+    return run_query(QUERY_HABITACION_BY_ID, {"TipoID": tipo_hab_id})
 
 def habitacion_add(data):
     run_query(QUERY_HABITACION_ADD, data)
@@ -46,10 +46,10 @@ def get_habitaciones():
     return(jsonify(result), 200)
 
 
-@habitaciones_blueprint.route("/api/v1/habitaciones/<int:hab_id>", methods=["GET"])
-def get_habitacion_by_id(hab_id):
+@habitaciones_blueprint.route("/api/v1/habitaciones/<int:tipo_hab_id>", methods=["GET"])
+def get_habitacion_by_id(tipo_hab_id):
     try:
-        result = habitacion_by_id(hab_id)
+        result = habitacion_by_id(tipo_hab_id)
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 

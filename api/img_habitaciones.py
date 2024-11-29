@@ -12,7 +12,7 @@ FROM ImgHabitaciones
 QUERY_IMG_HABITACION_BY_ID = """
 SELECT ImgHabitacionID, ImgHabitacion, TipoID
 FROM ImgHabitaciones
-WHERE ImgHabitacionID = :ImgHabitacionID
+WHERE TipoID = :TipoID
 """
 
 QUERY_IMG_HABITACION_ADD = """
@@ -28,7 +28,7 @@ def img_habitaciones_all():
     return run_query(QUERY_IMG_HABITACIONES)
 
 def img_habitacion_by_id(img_hab_id):
-    return run_query(QUERY_IMG_HABITACION_BY_ID, {"ImgHabitacionID": img_hab_id})
+    return run_query(QUERY_IMG_HABITACION_BY_ID, {"TipoID": img_hab_id})
 
 def img_habitacion_add(data):
     run_query(QUERY_IMG_HABITACION_ADD, data)
