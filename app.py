@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, flash
+from sqlalchemy import except_
 
 from api.habitaciones import habitaciones_blueprint
 from api.hoteles import hoteles_blueprint
@@ -9,6 +10,7 @@ from api.servicios import servicios_blueprint
 from api.servicios_contratados import servicios_contratados_blueprint
 from api.tipos_de_habitacion import tipos_de_habitacion_blueprint
 from api.usuarios import usuarios_blueprint
+from datetime import datetime
 
 import requests
 
@@ -110,7 +112,37 @@ def seleccion_habitacion(TipoID):
     return render_template('seleccion_habitacion.html', habitacion_imagen=habitacion_imagen)
 
 @app.route('/terminar_reserva') #aca se deberia finalizar la reserva mandando al back los datos que sean solicitados
-def terminar_reserva():
+def terminar_reserva(HabitacionID, PrecioAdulto):
+    if 'userid' not in session:
+        return render_template('iniciar_sesion.html')
+    if request.method == 'POST':
+        UsuarioID = session['userid']
+        HabitacionID = HabitacionID
+        Desde = request.form.get('reserva_desde')
+        Hasta = request.form.get('reserva_hasta')
+        CantNiños = request.form.get('cantidad_de_niños')
+        CantAdultos = request.form.get('cantidad_de_adultos')
+        Creacion = datetime.utcnow()
+        PrecioTotal = (int(PrecioAdulto) * int(CantAdultos)) + ((int(PrecioAdulto)/2) * int(CantNiños))
+
+        reserva = {
+            'UsuarioID': UsuarioID,
+            'HabitacionID': HabitacionID,
+            'Desde': Desde,
+            'Hasta': Hasta,
+            'CantNiños': CantNiños,
+            'CantAdultos': CantAdultos,
+            'Creacion': Creacion.isoformat(),
+            'PrecioTotal': PrecioTotal,
+        }
+
+        try:
+            response = requests.post(url=f'{API_URL}/reservas', json=reserva)
+            response.raise_for_status()  # Esto generará una excepción si la respuesta contiene un error HTTP
+            flash('Reserva creada con exito!')
+            return redirect(url_for('reserva'))
+        except requests.exceptions.RequestException as e:
+            flash(f'error al crear la reserva: {e}')
 
     return render_template('terminar_reserva.html')
 

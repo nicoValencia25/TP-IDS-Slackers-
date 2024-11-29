@@ -24,7 +24,7 @@
                         <td class="td_hab_l">{{ habitacion.TipoID }}</td>
                         <td class="td_hab_l">{{ habitacion.NumHabitacion }}</td>
                         <td class="td_hab">{{ habitacion.Piso }}</td>
-                        <td class="td_hab"><a href='{{ url_for('terminar_reserva') }}'>IR</a></td>
+                        <td class="td_hab"><a href='{{ url_for('terminar_reserva', HabitacionID = habitacion.HabitacionID,_external=True) }}'>IR</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
