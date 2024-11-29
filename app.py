@@ -50,10 +50,12 @@ def log():
             session['userid'] = userid
             flash('sesion iniciada correctamente')
             return redirect(url_for('home'))
+        else:
+            flash(f'error al iniciar sesion')
+            return redirect(url_for('home'))
     except requests.exceptions.RequestException as e:
-            flash(f'error al iniciar sesion: {e}')
-            return render_template('404.html')
-
+        flash(f'error al crear la reserva: {e}')
+        return render_template('404.html')
 
 
 
@@ -125,6 +127,12 @@ def seleccion_habitacion(TipoID):
 def terminar_reserva(HabitacionID, PrecioAdulto):
     if 'userid' not in session:
         return render_template('iniciar_sesion.html')
+
+    no_disp_response = requests.get(API_URL + 'reservas') #voy a intentar usar un if para mostrar solo las de esa habitacion
+    no_disp_response.raise_for_status()
+    no_disponibles = no_disp_response.json()
+
+
     if request.method == 'POST':
         UsuarioID = session['userid']
         HabitacionID = HabitacionID
@@ -154,15 +162,19 @@ def terminar_reserva(HabitacionID, PrecioAdulto):
         except requests.exceptions.RequestException as e:
             flash(f'error al crear la reserva: {e}')
 
-    return render_template('terminar_reserva.html')
+    return render_template('terminar_reserva.html',  no_disponibles = no_disponibles)
 
 @app.route('/reserva')
 def reservas():
 
     if 'userid' not in session:
         return render_template('iniciar_sesion.html')
+
+    response = requests.get(API_URL + 'reservas')
+    response.raise_for_status()
+    reserva = response.json()
     
-    return render_template('reservas_act.html')
+    return render_template('reservas_act.html', reserva=reserva)
 
 @app.route('/reservas/<string:reserva>/editar_reserva')
 def editar_reserva(reserva):
