@@ -78,7 +78,7 @@ body {
 }
 
 :root {
-    --primary: #f1f0f0;
+    --primary: rgb(102, 16, 242);
     --secondary: #FE8800;
     --light: #F5F5F5;
     --dark: #14141F;
@@ -161,7 +161,7 @@ body {
     position: relative;
     margin-right: 25px;
     padding: 35px 0;
-    color: #FFFFFF !important;
+    color: #000000 !important;
     font-size: 18px;
     font-weight: 600;
     outline: none;
@@ -250,10 +250,12 @@ body {
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(88, 0, 229, 0.7), rgba(74, 21, 232, 0.7)), url(../static/img/bg-hero);
+    background: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255)), url(../static/img/bg-hero);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    border-color: #6610f2;
+    border-style: solid;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
@@ -424,6 +426,7 @@ body {
 .testimonial-carousel .owl-item.center .testimonial-item {
     background: var(--primary) !important;
     border-color: var(--primary) !important;
+    border-radius: 16px;
 }
 
 .testimonial-carousel .owl-item.center .testimonial-item * {
@@ -548,6 +551,8 @@ body {
     margin-right: 200px;
     margin-top: 20px;
     height: 240px;
+    border-style: solid;
+    border-color: #6610f2;
 
 }
 
@@ -636,16 +641,16 @@ body {
     padding-bottom: 5px;
 }
 .muestra{
-    width: 250px;
-    height: 200px;
-    margin-left: -270px;
+    width: 275px;
+    height: 230px;
+    margin-left: -295px;
     float: left;
-    margin-top: -165px;
+    margin-top: -185px;
 
 }
 
 .titulo_nav{
-    color: #FFFFFF;
+    color: #6610f2;
     margin-left: 200px;
     margin-top: 10px;
 }
@@ -698,7 +703,7 @@ margin-top: 10px;
 .contenedor_reser2{
     padding-left: 200px;
     color: #6610f2;
-    background-color: #6610f2;
+    background-color: #ffffff;
     padding-bottom:0px;
     height: fit-content;
     padding-bottom: 50px;
