@@ -97,9 +97,17 @@ def book_hotel(HotelID):
 
 @app.route('/habitaciones/<TipoID>')  #aca falta un /<HotelID>/<TipoID>
 def seleccion_habitacion(TipoID):
-    response =requests.get(API_URL + '/'+HotelID)
+    response =requests.get(API_URL + '/habitaciones'+TipoID)
+    response.raise_for_status()
+    habitaciones = response.json()
 
-    return render_template('seleccion_habitacion.html')
+    img_response = requests.get(API_URL + 'img_habitaciones/'+TipoID)
+    img_response.raise_for_status()
+    imagen = img_response.json()
+
+    habitacion_imagen = zip(habitaciones, imagen)
+
+    return render_template('seleccion_habitacion.html', habitacion_imagen=habitacion_imagen)
 
 @app.route('/terminar_reserva') #aca se deberia finalizar la reserva mandando al back los datos que sean solicitados
 def terminar_reserva():

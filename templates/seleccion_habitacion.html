@@ -9,6 +9,7 @@
             <table class="tabla_habitaciones_2">
                 <thead class="thead_hab">
                 <tr>
+                    <th class="th_l">Imagen</th>
                     <th class="th_l">Tipo de Habitacion</th>
                     <th class="th_l">Numero de Habitacion</th>
                     <th>Piso</th>
@@ -17,12 +18,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% for tipo in tipos %}
+                    {% for habitacion, img in habitacion_imagen %}
                     <tr>
-                        <td class="td_hab_l">{{ tipo.TipoID }}</td>
-                        <td class="td_hab_l">{{ habit.NumHabitacion }}</td>
-                        <td class="td_hab">{{ habit.Piso }}</td>
-                        <td class="td_hab">IR</td>
+                        <td class="td_hab_l"><img src="{{ url_for('static',filename="img/ImgHotelesBD"+img.ImgHabitacion) }}" alt=""></td>
+                        <td class="td_hab_l">{{ habitacion.TipoID }}</td>
+                        <td class="td_hab_l">{{ habitacion.NumHabitacion }}</td>
+                        <td class="td_hab">{{ habitacion.Piso }}</td>
+                        <td class="td_hab"><a href='{{ url_for('terminar_reserva') }}'>IR</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
