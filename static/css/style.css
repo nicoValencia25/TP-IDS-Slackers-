@@ -580,7 +580,7 @@ body {
 }
 
 .cancelar_reserva{
-    margin-right: -300px;
+    float: right;
     padding: 10px;
     background-color: red;
     border: 0px;
@@ -597,6 +597,9 @@ body {
 .en_curso{
     margin-right: 700px;
 
+}
+.en_curso2{
+    margin-top: 50px;
 }
 
 .mini_logo{
@@ -647,6 +650,13 @@ body {
     float: left;
     margin-top: -185px;
 
+}
+.muestra2{
+    width: 275px;
+    height: 230px;
+    margin-left: -295px;
+    float: left;
+    margin-top: -145px;
 }
 
 .titulo_nav{
@@ -703,7 +713,7 @@ margin-top: 10px;
 .contenedor_reser2{
     padding-left: 200px;
     color: #6610f2;
-    background-color: #ffffff;
+    background-color: #9f9e9e;
     padding-bottom:0px;
     height: fit-content;
     padding-bottom: 50px;

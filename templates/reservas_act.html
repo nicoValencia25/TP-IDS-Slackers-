@@ -10,59 +10,34 @@
 
 
 <!-- cuerpo ¿uso con for? -->
-<h1 class="titulo_actuales">   Mis reservas</h1>
-    <div class="contenedor_reserv">
-        <h1 class="reservas_title"></h1>
-        <!-- todas las reservas-->
-        <div class="contenedor_reserva_unica">
-            <h3 class="reservas_cont"> Hotel 1 </h3>
-            <div class="info_lugar">
-                <p>el mejor hotel numero 1</p>
-                <img class="muestra" src="" alt="">
-                <div class="en_curso">
-                    <img class="mini_logo" src="/static/img/logo_mini.png" alt="">
-                    <p class="mini_txt">En curso</p>
-                </div>
+<h1 class="titulo_actuales">Hoteles disponibles en todo el pais</h1>
 
 
-            </div>
-            <button onclick="location.href='editar'" class="editar_reserva">Editar reserva</button>
-            <button class="cancelar_reserva">Cancelar reserva</button>
-        </div>
+
+            <div class="contenedor_reser2">
+             <h1 class="reservas_title"></h1>
+
 
         <!-- todas las reservas-->
         <div class="contenedor_reserva_unica">
-            <h3 class="reservas_cont"> Hotel 2 </h3>
-            <div class="info_lugar">
-                <p>el mejor hotel numero 2</p>
-                <img class="muestra" src="" alt="">
-                <div class="en_curso">
-                    <img class="mini_logo" src="/static/img/logo_mini.png" alt=""> 
-                    <p class="mini_txt">En curso</p>
+            <h3 class="reservas_cont">hotel </h3>
+            <div class="info_lugar" style="width: 600px">
+                <p style="float: right">ID de la Reserva: </p>
+                <p>Fecha de entrada: </p>
+                <p>Fecha de salida: </p>
+                <img class="muestra2" src="" alt="">
+                <div class="en_curso2">
+                    <img class="mini_logo" src="{{ url_for('static',filename='img/logo_mini.png') }}" alt="">
+                    <p class="mini_txt">En Curso</p>
                 </div>
 
 
             </div>
-            <button onclick="location.href='editar'" class="editar_reserva">Editar reserva</button>
-            <button class="cancelar_reserva">Cancelar reserva</button>
-        </div>
-        <div class="contenedor_reserva_unica">
-            <h3 class="reservas_cont"> Hotel 2 </h3>
-            <div class="info_lugar">
-                <p>el mejor hotel numero 2</p>
-                <img class="muestra" src="" alt="">
-                <div class="en_curso">
-                    <img class="mini_logo" src="/static/img/logo_mini.png" alt=""> 
-                    <p class="mini_txt">En curso</p>
-                </div>
+            <button type="button" class="cancelar_reserva">Cancelar Reserva</button>
 
-
-            </div>
-            <button class="editar_reserva">Editar reserva</button>
-            <button class="cancelar_reserva">Cancelar reserva</button>
         </div>
 
 
-    </div>
-    </div>
+        </div>
+
  {% endblock %}
