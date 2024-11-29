@@ -45,28 +45,38 @@ def log():
         response = requests.get(API_URL + 'usuarios/'+userid)
         response.raise_for_status()
         usuario_base = response.json()
-
+    try:
         if  (user for user in usuario_base if user[1] == password and user[5] == username):
             session['userid'] = userid
+            flash('sesion iniciada correctamente')
             return redirect(url_for('home'))
-        else:
-            return render_template('iniciar_sesion.html')
+    except requests.exceptions.RequestException as e:
+            flash(f'error al iniciar sesion: {e}')
+            return render_template('404.html')
+
 
 
 
 @app.route('/logout')
 def logout():
     session.pop('userid', None)
+    flash('logged out')
     return redirect(url_for('home'))
 
 @app.route('/dest')
 def dest():
+    if 'userid' not in session:
+        return render_template('iniciar_sesion.html')
     
     return render_template('destination.html')
 
 
 @app.route('/book')
 def book():
+        if 'userid' not in session:
+            return render_template('iniciar_sesion.html')
+
+
         response = requests.get(API_URL + 'hoteles')
         response.raise_for_status()
         hoteles = response.json()
@@ -148,6 +158,9 @@ def terminar_reserva(HabitacionID, PrecioAdulto):
 
 @app.route('/reserva')
 def reservas():
+
+    if 'userid' not in session:
+        return render_template('iniciar_sesion.html')
     
     return render_template('reservas_act.html')
 
@@ -168,20 +181,29 @@ def sobre_nosotros():
 
 @app.route('/contacto')
 def contacto():
-    
+    if 'userid' not in session:
+        return render_template('iniciar_sesion.html')
+
+
     return render_template('contact.html')
 
 @app.route('/packages')
 def package():
+    if 'userid' not in session:
+        return render_template('iniciar_sesion.html')
     
     return render_template('package.html')
 @app.route('/team')
 def team():
+    if 'userid' not in session:
+        return render_template('iniciar_sesion.html')
     
     return render_template('team.html')
 
 @app.route('/testimonial')
 def testimonial():
+    if 'userid' not in session:
+        return render_template('iniciar_sesion.html')
     
     return render_template('testimonial.html')
 
