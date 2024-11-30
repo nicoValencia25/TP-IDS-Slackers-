@@ -123,7 +123,7 @@ def seleccion_habitacion(TipoID):
 
     return render_template('seleccion_habitacion.html', habitacion_imagen=habitacion_imagen)
 
-@app.route('/terminar_reserva') #aca se deberia finalizar la reserva mandando al back los datos que sean solicitados
+@app.route('/terminar_reserva', methods=['GET','POST']) #aca se deberia finalizar la reserva mandando al back los datos que sean solicitados
 def terminar_reserva(HabitacionID, PrecioAdulto):
     if 'userid' not in session:
         return render_template('iniciar_sesion.html')
@@ -176,15 +176,16 @@ def reservas():
     
     return render_template('reservas_act.html', reserva=reserva)
 
-@app.route('/reservas/<string:reserva>/editar_reserva')
-def editar_reserva(reserva):
-    
-    return render_template('editar_reserva.html', reserva=reserva)
 
-@app.route('/reservas/<string:reserva>/cancelar_reserva')
-def cancelar_reserva(reserva):
-    
-    return render_template('cancelar_reserva.html', reserva=reserva)
+@app.route('/reservas/<int:reserva_id>', methods=['DELETE'])
+def cancelar_reserva(reserva_id):
+    try:
+        response = requests.delete(f'{API_URL}/reservas/{reserva_id}')
+        response.raise_for_status()
+        flash('Reserva cancelada con exito!')
+    except requests.exceptions.RequestException as e:
+        flash(f'error al cancelar la reserva: {e}')
+    return redirect(url_for('reservas'))
 
 @app.route('/sobre_nosotros')
 def sobre_nosotros():
