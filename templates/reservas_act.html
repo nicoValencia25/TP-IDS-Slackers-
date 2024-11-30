@@ -17,14 +17,14 @@
             <div class="contenedor_reser2">
              <h1 class="reservas_title"></h1>
 
-
-        <!-- todas las reservas-->
+<!-- todas las reservas-->
+       {% for data in reservas %}
         <div class="contenedor_reserva_unica">
-            <h3 class="reservas_cont">hotel </h3>
+
+            <h3 class="reservas_cont">ID de la Reserva: {{ data.ReservaID }}</h3>
             <div class="info_lugar" style="width: 600px">
-                <p style="float: right">ID de la Reserva: </p>
-                <p>Fecha de entrada: </p>
-                <p>Fecha de salida: </p>
+                <p>Fecha de entrada: {{ data.Desde }}</p>
+                <p>Fecha de salida: {{ data.Hasta }}</p>
                 <img class="muestra2" src="" alt="">
                 <div class="en_curso2">
                     <img class="mini_logo" src="{{ url_for('static',filename='img/logo_mini.png') }}" alt="">
@@ -33,11 +33,12 @@
 
 
             </div>
-            <button type="button" class="cancelar_reserva"  >Cancelar Reserva</button>
-
+            <form action="{{ url_for('cancelar_reserva', reserva_id = data.ReservaID) }}" method="post">
+            <button type="submit" class="cancelar_reserva" >Cancelar Reserva</button>
+            </form>
         </div>
 
 
         </div>
-
+ {% endfor %}
  {% endblock %}

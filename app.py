@@ -153,7 +153,7 @@ def terminar_reserva(HabitacionID):
     hora_actual_str = hora_actual.strftime(formato_salida)
 
 
-    no_disp_response = requests.get(API_URL + 'reservas') #voy a intentar usar un if para mostrar solo las de esa habitacion
+    no_disp_response = requests.get(API_URL + 'reservas') #voy a  mostrar solo las de esa habitacion
     no_disp_response.raise_for_status()
     no_disponibles = no_disp_response.json()
     filtrado_no_disponibles = []
@@ -216,22 +216,25 @@ def reservas():
     response.raise_for_status()
     reserva = response.json()
     mis_reservas = []
+    UsuarioID = int(UsuarioID)
     for res in reserva:
         if res['UsuarioID'] == UsuarioID:
             mis_reservas.append(res)
     
-    return render_template('reservas_act.html', reserva=mis_reservas)
+    return render_template('reservas_act.html', reservas=mis_reservas)
 
 
-@app.route('/reservas/<int:reserva_id>', methods=['DELETE'])
+@app.route('/reserva/<int:reserva_id>', methods=['POST'])
 def cancelar_reserva(reserva_id):
-    try:
-        response = requests.delete(f'{API_URL}/reservas/{reserva_id}')
-        response.raise_for_status()
-        flash('Reserva cancelada con exito!')
-    except requests.exceptions.RequestException as e:
-        flash(f'error al cancelar la reserva: {e}')
-    return redirect(url_for('reservas'))
+    if request.method == 'POST':
+        try:
+            response = requests.delete(API_URL+'reservas/'+reserva_id)
+            response.raise_for_status()
+            flash('Reserva cancelada con exito!')
+            return redirect(url_for('reservas'))
+        except requests.exceptions.RequestException as e:
+            flash(f'error al cancelar la reserva: {e}')
+
 
 @app.route('/sobre_nosotros')
 def sobre_nosotros():
