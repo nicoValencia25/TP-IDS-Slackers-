@@ -23,7 +23,7 @@
     <div class="contenedor_info2">
             <h3 class="texto_info_titulo_tabla">Tipos de Habitaciones</h3>
 
-
+<pre>{{ habitacion }}</pre>
             <table class="tabla_habitaciones">
                 <thead class="thead_hab">
                 <tr>
@@ -32,12 +32,12 @@
                     <th>Cantidad de Huespedes</th>
                     <th>Precio Adulto</th>
                     <th>Superficie</th>
-                    <th>Numero</th>
                     <th>Reservar</th>
 
                 </tr>
                 </thead>
                 <tbody>
+
                     {% for habit in habitacion %}
                     <tr>
                         <td class="td_hab_l">{{ habit.Nombre }}</td>
@@ -45,7 +45,6 @@
                         <td class="td_hab">{{ habit.CantHuespedes }}</td>
                         <td class="td_hab">${{ habit.PrecioAdulto }}</td>
                         <td class="td_hab">{{ habit.Superficie }}</td>
-                        <td class="td_hab">{{ habit.TipoID }}</td>
                         <td class="td_hab"><a href='{{ url_for('seleccion_habitacion', TipoID=habit.TipoID, PrecioAdulto=habit.PrecioAdulto, _external=True) }}'>IR</a></td>
                     </tr>
                     {% endfor %}
