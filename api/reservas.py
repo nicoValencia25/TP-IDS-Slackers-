@@ -80,7 +80,7 @@ def add_reserva():
 
     keys = (
         "ReservaID",
-        "ReservaCreacion",
+        "Creacion",
         "Desde",
         "Hasta",
         "CantNiños",

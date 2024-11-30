@@ -145,6 +145,14 @@ def terminar_reserva(HabitacionID):
     if 'userid' not in session:
         return render_template('iniciar_sesion.html')
 
+    formato_entrada = "%Y-%m-%dT%H:%M"
+    formato_salida = "%Y-%m-%d %H:%M:%S"
+
+
+    hora_actual = datetime.now()
+    hora_actual_str = hora_actual.strftime(formato_salida)
+
+
     no_disp_response = requests.get(API_URL + 'reservas') #voy a intentar usar un if para mostrar solo las de esa habitacion
     no_disp_response.raise_for_status()
     no_disponibles = no_disp_response.json()
@@ -156,30 +164,41 @@ def terminar_reserva(HabitacionID):
 
     if request.method == 'POST':
         UsuarioID = session['userid']
-        HabitacionID = HabitacionID
-        Desde = request.form.get('reserva_desde')
-        Hasta = request.form.get('reserva_hasta')
+        Desde_str = request.form.get('reserva_desde')
+        Hasta_str = request.form.get('reserva_hasta')
         CantNiños = request.form.get('cantidad_de_niños')
         CantAdultos = request.form.get('cantidad_de_adultos')
-        Creacion = datetime.utcnow()
-        PrecioTotal = (int(1) * int(CantAdultos)) + ((int(1)/2) * int(CantNiños))
+        PrecioTotal = (int(1) * int(CantAdultos)) + ((int(1)) * int(CantNiños))
+
+        UsuarioID = int(UsuarioID)
+        HabitacionID = int(HabitacionID)
+        CantNiños = int(CantNiños)
+        CantAdultos = int(CantAdultos)
+        PrecioTotal = int(PrecioTotal)
+
+        Desde_obj = datetime.strptime(Desde_str, formato_entrada)
+        Desde_t = Desde_obj.strftime(formato_salida)
+        Hasta_obj = datetime.strptime(Hasta_str, formato_entrada)
+        Hasta_t = Hasta_obj.strftime(formato_salida)
 
         reserva = {
-            'UsuarioID': UsuarioID,
-            'HabitacionID': HabitacionID,
-            'Desde': Desde,
-            'Hasta': Hasta,
+            'ReservaID' : 2, #momentaneamente hasta q se arregle
+
+            'Creacion': hora_actual_str,
+            'Desde': Desde_t,
+            'Hasta': Hasta_t,
             'CantNiños': CantNiños,
             'CantAdultos': CantAdultos,
-            'Creacion': Creacion.isoformat(),
             'PrecioTotal': PrecioTotal,
+            'HabitacionID': HabitacionID,
+            'UsuarioID': UsuarioID,
         }
 
         try:
-            response = requests.post(url=f'{API_URL}/reservas', json=reserva)
+            response = requests.post(API_URL+'reservas', json=reserva)
             response.raise_for_status()  # Esto generará una excepción si la respuesta contiene un error HTTP
             flash('Reserva creada con exito!')
-            return redirect(url_for('reserva'))
+            return redirect(url_for('reservas'))
         except requests.exceptions.RequestException as e:
             flash(f'error al crear la reserva: {e}')
 

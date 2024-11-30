@@ -5,13 +5,13 @@
 <div class="contenedor_reserv_fin"  >
     <div class="contenedor_edit_reservas">
 
-        <form  class="formulario_reserva" action="" method="POST">
+        <form  class="formulario_reserva" action="" method="post">
 
             <label class="text_form_reserv" for="reserva_desde">Fecha de inicio de la reserva</label>
-                <input type="date" class="input_form_fechas" id="reserva_desde" name="reserva_desde">
+                <input type="datetime-local" class="input_form_fechas" id="reserva_desde" name="reserva_desde">
 
             <label class="text_form_reserv" for="reserva_hasta">Fecha de finalizacion de la reserva</label>
-                <input type="date" class="input_form_fechas" id="reserva_hasta" name="reserva_hasta">
+                <input type="datetime-local" class="input_form_fechas" id="reserva_hasta" name="reserva_hasta">
 
 
             <label class="text_form_reserv" for="cantidad_de_adultos"> Cantidad de adultos</label>
@@ -36,10 +36,12 @@
                 </tr>
                 </thead>
                 <tbody>
+                {% for fechas in filtrado_no_disponibles %}
                     <tr>
-                        <td class="td_hab_l"></td>
-                        <td class="td_hab_l"></td>
+                        <td class="td_hab_l">{{ fechas.Desde }}</td>
+                        <td class="td_hab_l">{{ fechas.Hasta }}</td>
                     </tr>
+                {% endfor %}
 
                 </tbody>
 
