@@ -85,9 +85,13 @@ def book():
 
         response_img = requests.get(API_URL + 'img_hoteles')
         response_img.raise_for_status()
-        imagenes = response_img.json()
+        imagenes_json = response_img.json()
+        imagenes_lista = list()
+        for imagen in imagenes_json:
+            if 'Img1.' in imagen['ImgHotel']:
+                imagenes_lista.append(imagen)
 
-        hoteles_imagenes = zip(hoteles, imagenes)
+        hoteles_imagenes = zip(hoteles, imagenes_lista)
 
         return render_template('booking.html', hoteles_imagenes=hoteles_imagenes)
 
