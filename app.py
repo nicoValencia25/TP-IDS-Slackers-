@@ -109,33 +109,49 @@ def book_hotel(HotelID):
         hab_response = requests.get(API_URL + 'tipos_de_habitacion')
         hab_response.raise_for_status()
         habitacion = hab_response.json()
-        habitaciones_filtradas = [habit for habit in habitacion if habit['HotelID'] == HotelID]
+        habitaciones_filtradas = []
+        HotelID = int(HotelID)
+        for habit in habitacion:
+            if habit['HotelID'] == HotelID:
+                habitaciones_filtradas.append(habit)
 
         return render_template('reservar.html', hotel=hotel, imagen=imagen, habitacion=habitaciones_filtradas)
 
 
 @app.route('/habitaciones/<TipoID>')  #aca falta verficiar q funciona
 def seleccion_habitacion(TipoID):
-    response =requests.get(API_URL + '/habitaciones'+TipoID)
+
+    response =requests.get(API_URL + '/habitaciones')
     response.raise_for_status()
     habitaciones = response.json()
 
-    img_response = requests.get(API_URL + 'img_habitaciones/'+TipoID)
+    habitaciones_filtradas = []
+
+    img_response = requests.get(API_URL + 'img_habitaciones')
     img_response.raise_for_status()
     imagen = img_response.json()
 
-    habitacion_imagen = zip(habitaciones, imagen)
+    TipoID = int(TipoID)
+    for habit in habitaciones:
+        if habit['TipoID'] == TipoID:
+            habitaciones_filtradas.append(habit)
+
+    habitacion_imagen = zip(habitaciones_filtradas, imagen)
 
     return render_template('seleccion_habitacion.html', habitacion_imagen=habitacion_imagen)
 
-@app.route('/terminar_reserva', methods=['GET','POST']) #aca se deberia finalizar la reserva mandando al back los datos que sean solicitados
-def terminar_reserva(HabitacionID, PrecioAdulto):
+@app.route('/terminar_reserva/<HabitacionID>', methods=['GET','POST']) #aca se deberia finalizar la reserva mandando al back los datos que sean solicitados
+def terminar_reserva(HabitacionID):
     if 'userid' not in session:
         return render_template('iniciar_sesion.html')
 
     no_disp_response = requests.get(API_URL + 'reservas') #voy a intentar usar un if para mostrar solo las de esa habitacion
     no_disp_response.raise_for_status()
     no_disponibles = no_disp_response.json()
+    filtrado_no_disponibles = []
+    for reserv in no_disponibles:
+        if reserv['HabitacionID'] == HabitacionID:
+            filtrado_no_disponibles.append(reserv)
 
 
     if request.method == 'POST':
@@ -146,7 +162,7 @@ def terminar_reserva(HabitacionID, PrecioAdulto):
         CantNiños = request.form.get('cantidad_de_niños')
         CantAdultos = request.form.get('cantidad_de_adultos')
         Creacion = datetime.utcnow()
-        PrecioTotal = (int(PrecioAdulto) * int(CantAdultos)) + ((int(PrecioAdulto)/2) * int(CantNiños))
+        PrecioTotal = (int(1) * int(CantAdultos)) + ((int(1)/2) * int(CantNiños))
 
         reserva = {
             'UsuarioID': UsuarioID,
@@ -167,7 +183,7 @@ def terminar_reserva(HabitacionID, PrecioAdulto):
         except requests.exceptions.RequestException as e:
             flash(f'error al crear la reserva: {e}')
 
-    return render_template('terminar_reserva.html',  no_disponibles = no_disponibles)
+    return render_template('terminar_reserva.html',  filtrado_no_disponibles = filtrado_no_disponibles)
 
 @app.route('/reserva')
 def reservas():
@@ -175,11 +191,17 @@ def reservas():
     if 'userid' not in session:
         return render_template('iniciar_sesion.html')
 
+    UsuarioID = session['userid']
+
     response = requests.get(API_URL + 'reservas')
     response.raise_for_status()
     reserva = response.json()
+    mis_reservas = []
+    for res in reserva:
+        if res['UsuarioID'] == UsuarioID:
+            mis_reservas.append(res)
     
-    return render_template('reservas_act.html', reserva=reserva)
+    return render_template('reservas_act.html', reserva=mis_reservas)
 
 
 @app.route('/reservas/<int:reserva_id>', methods=['DELETE'])
