@@ -9,10 +9,10 @@ SELECT ImgHotelID, ImgHotel, HotelID
 FROM ImgHoteles
 """
 
-QUERY_IMG_HOTEL_BY_ID = """
+QUERY_IMG_HOTEL_BY_HOTELID = """
 SELECT ImgHotelID, ImgHotel, HotelID
 FROM ImgHoteles
-WHERE ImgHotelID = :ImgHotelID
+WHERE HotelID = :HotelID
 """
 
 QUERY_IMG_HOTEL_ADD = """
@@ -27,8 +27,8 @@ DELETE FROM ImgHoteles WHERE ImgHotelID = :ImgHotelID
 def img_hoteles_all():
     return run_query(QUERY_IMG_HOTELES)
 
-def img_hotel_by_id(img_hotel_id):
-    return run_query(QUERY_IMG_HOTEL_BY_ID, {"ImgHotelID": img_hotel_id})
+def img_hotel_by_hotelid(hotel_id):
+    return run_query(QUERY_IMG_HOTEL_BY_HOTELID, {"HotelID": hotel_id})
 
 def img_hotel_add(data):
     run_query(QUERY_IMG_HOTEL_ADD, data)
@@ -46,10 +46,10 @@ def get_img_hoteles():
     return jsonify(result), 200
 
 
-@img_hoteles_blueprint.route("/api/v1/img_hoteles/<int:img_hotel_id>", methods=["GET"])
-def get_img_hotel_by_id(img_hotel_id):
+@img_hoteles_blueprint.route("/api/v1/img_hoteles/<int:hotel_id>", methods=["GET"])
+def get_img_hotel_by_hotelid(hotel_id):
     try:
-        result = img_hotel_by_id(img_hotel_id)
+        result = img_hotel_by_hotelid(hotel_id)
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
