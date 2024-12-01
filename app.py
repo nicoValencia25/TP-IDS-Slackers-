@@ -102,9 +102,13 @@ def book_hotel(HotelID):
         response.raise_for_status()
         hotel = response.json()
 
-        img_response = requests.get(API_URL + 'img_hoteles/'+HotelID)
-        img_response.raise_for_status()
-        imagen = img_response.json()
+        response_img = requests.get(API_URL + 'img_hoteles')
+        response_img.raise_for_status()
+        imagenes_json = response_img.json()
+        imagenes_hotel = list()
+        for imagen in imagenes_json:
+            if int(HotelID) == imagen['HotelID']:
+                imagenes_hotel.append(imagen)
 
         hab_response = requests.get(API_URL + 'tipos_de_habitacion')
         hab_response.raise_for_status()
@@ -115,7 +119,7 @@ def book_hotel(HotelID):
             if habit['HotelID'] == HotelID:
                 habitaciones_filtradas.append(habit)
 
-        return render_template('reservar.html', hotel=hotel, imagen=imagen, habitacion=habitaciones_filtradas)
+        return render_template('reservar.html', hotel=hotel, imagenes_hotel=imagenes_hotel, habitacion=habitaciones_filtradas)
 
 
 @app.route('/habitaciones/<TipoID>')  #aca falta verficiar q funciona
