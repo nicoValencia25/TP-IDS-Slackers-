@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/galeria.css') }}">
+{% endblock %}
 {% block body %}
 
 
@@ -6,14 +9,34 @@
 <div class="contenedor_info_back">
 
 
-<img src="{{ url_for('static', filename = "img/ImgHotelesBD/"+imagen.ImgHotel) }}" class="imagen_info_hotel2" alt="">
-
-
     <div class="contenedor_info">
 
         <h2 class="texto_info_titulo"> {{ hotel.Nombre }} </h2>
-        <h5 class="texto_info" style="color: #72a522">{{ hotel.Direccion }}</h5>
-        <h5 class="texto_info" style="color: #72a522">{{ hotel.Localidad }}</h5>
+        <h5 class="texto_info" style="color: #72a522">{{ hotel.Direccion }}, {{ hotel.Localidad }}, {{ hotel.CodigoPostal }} {{ hotel.Provincia }}</h5>
+
+        <div class="contenedor">
+            <div class="contenedor-galeria">
+                <div class="deslizar deslizar-izquierda">
+                    <img src="{{url_for('static', filename='img/flecha-izquierda.png')}}">
+                </div>
+
+                <img class="mostrar-imagenes" src="{{url_for('static', filename='img/ImgHotelesBD/'+imagenes_hotel[0]['ImgHotel'])}}">
+
+                <div class="contenedor-imagenes oculto">
+                    {% for imagen in imagenes_hotel %}
+                        <div src="{{url_for('static', filename='img/ImgHotelesBD/'+imagen['ImgHotel'])}}"></div>
+
+                    {% endfor %}
+                </div>
+
+
+                <div class="deslizar deslizar-derecha">
+                    <img src="{{url_for('static', filename='img/flecha-derecha.png')}}">
+                </div>
+            </div>
+            <span class="contador"></span>
+        </div>
+
         <p class="texto_info">{{ hotel.Descripcion }}</p>
 
     </div>
@@ -23,6 +46,7 @@
     <div class="contenedor_info2">
             <h3 class="texto_info_titulo_tabla">Tipos de Habitaciones</h3>
 
+
             <table class="tabla_habitaciones">
                 <thead class="thead_hab">
                 <tr>
@@ -31,12 +55,14 @@
                     <th>Cantidad de Huespedes</th>
                     <th>Precio Adulto</th>
                     <th>Superficie</th>
+                    <th>Numero</th>
                     <th>Reservar</th>
 
                 </tr>
-                </thead>
-                <tbody>
 
+                </thead>
+
+                <tbody>
                     {% for habit in habitacion %}
                     <tr>
                         <td class="td_hab_l">{{ habit.Nombre }}</td>
@@ -44,7 +70,8 @@
                         <td class="td_hab">{{ habit.CantHuespedes }}</td>
                         <td class="td_hab">${{ habit.PrecioAdulto }}</td>
                         <td class="td_hab">{{ habit.Superficie }}</td>
-                        <td class="td_hab"><a href='{{ url_for('seleccion_habitacion', TipoID=habit.TipoID, _external=True) }}'>IR</a></td>
+                        <td class="td_hab">{{ habit.TipoID }}</td>
+                        <td class="td_hab"><a href='{{ url_for('seleccion_habitacion', TipoID=habit.TipoID, PrecioAdulto=habit.PrecioAdulto, _external=True) }}'>IR</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -56,5 +83,5 @@
 
 
 </div>
-
+    <script src="{{ url_for('static', filename='js/galeria.js') }}"></script>
 {% endblock %}
