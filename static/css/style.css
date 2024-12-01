@@ -789,12 +789,11 @@ background-color: #6610f2;
 
 .contenedor_info{
     background-color: #FFFFFF;
-    float: right;
+    display: flex;
+    flex-direction: column;
     width: 1100px;
-    margin-top: 0px;
-    margin-left: 20px;
+    margin: 0 auto 20px;
     border-radius: 1rem;
-    margin-bottom: 20px;
     padding: 10px;
 
 }
