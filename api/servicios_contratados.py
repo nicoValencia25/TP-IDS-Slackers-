@@ -6,27 +6,27 @@ servicios_contratados_blueprint = Blueprint('servicios_contratados_blueprint', _
 
 QUERY_SERVICIOS_CONTRATADOS = """
 SELECT ServicioContratadoID, Creacion, PrecioTotal, ServicioID, ReservaID
-FROM ServiciosContratados
+FROM ServicioContratado
 """
 
 QUERY_SERVICIO_CONTRATADO_BY_ID = """
 SELECT ServicioContratadoID, Creacion, PrecioTotal, ServicioID, ReservaID
-FROM ServiciosContratados 
+FROM ServicioContratado 
 WHERE ServicioContratadoID = :ServicioContratadoID
 """
 
 QUERY_SERVICIO_CONTRATADO_ADD = """
-INSERT INTO ServiciosContratados (ServicioContratadoID, Creacion, PrecioTotal, ServicioID, ReservaID)
+INSERT INTO ServicioContratado (ServicioContratadoID, Creacion, PrecioTotal, ServicioID, ReservaID)
 VALUES (:ServicioContratadoID, :Creacion, :PrecioTotal, :ServicioID, :ReservaID)
 """
 
 QUERY_SERVICIO_CONTRATADO_DELETE = """
-DELETE FROM ServiciosContratados WHERE ServicioContratadoID = :ServicioContratadoID
+DELETE FROM ServicioContratado WHERE ServicioContratadoID = :ServicioContratadoID
 """
 
 QUERY_SERVICIOS_CONTRATADOS_BY_RESERVAID = """
 SELECT ServicioContratadoID, Creacion, PrecioTotal, ServicioID, ReservaID
-FROM ServiciosContratados 
+FROM ServicioContratado 
 WHERE ReservaID = :ReservaID
 """
 
