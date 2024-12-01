@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, url_for, flash
+from flask import Flask, render_template, request, redirect, session, url_for, flash, jsonify
 from sqlalchemy import except_
 
 from api.habitaciones import habitaciones_blueprint
@@ -167,6 +167,8 @@ def terminar_reserva(HabitacionID):
             filtrado_no_disponibles.append(reserv)
 
 
+
+
     if request.method == 'POST':
         UsuarioID = session['userid']
         Desde_str = request.form.get('reserva_desde')
@@ -207,6 +209,13 @@ def terminar_reserva(HabitacionID):
             flash(f'error al crear la reserva: {e}')
 
     return render_template('terminar_reserva.html',  filtrado_no_disponibles = filtrado_no_disponibles)
+
+
+@app.route('/fechas_ocupadas')
+def fechas_ocupadas():
+
+
+    return jsonify()
 
 @app.route('/reserva')
 def reservas():

@@ -15,10 +15,10 @@
 
 
             <label class="text_form_reserv" for="cantidad_de_adultos"> Cantidad de adultos</label>
-            <input class="input_form" type="number" id="cantidad_de_adultos" name="cantidad_de_adultos">
+            <input class="input_form" type="number" id="cantidad_de_adultos" name="cantidad_de_adultos" min="0" placeholder="0">
 
             <label class="text_form_reserv" for="cantidad_de_niños"> Cantidad de niños</label>
-            <input class="input_form" type="number" id="cantidad_de_niños" name="cantidad_de_niños">
+            <input class="input_form" type="number" id="cantidad_de_niños" name="cantidad_de_niños" min="0" placeholder="0">
 
 
         <button type="submit" class="boton_confirmar">Confirmar reserva</button>
@@ -55,5 +55,7 @@
 
 </div>
 </div>
+
+
 
 {% endblock %}
