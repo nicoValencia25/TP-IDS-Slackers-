@@ -122,7 +122,7 @@ def book_hotel(HotelID):
         return render_template('reservar.html', hotel=hotel, imagenes_hotel=imagenes_hotel, habitacion=habitaciones_filtradas)
 
 
-@app.route('/habitaciones/<TipoID>')  #aca falta verficiar q funciona
+@app.route('/habitaciones/<TipoID>')
 def seleccion_habitacion(TipoID):
 
     response =requests.get(API_URL + '/habitaciones')
@@ -161,6 +161,7 @@ def terminar_reserva(HabitacionID):
     no_disp_response.raise_for_status()
     no_disponibles = no_disp_response.json()
     filtrado_no_disponibles = []
+    HabitacionID = int(HabitacionID)
     for reserv in no_disponibles:
         if reserv['HabitacionID'] == HabitacionID:
             filtrado_no_disponibles.append(reserv)
@@ -175,7 +176,6 @@ def terminar_reserva(HabitacionID):
         PrecioTotal = (int(1) * int(CantAdultos)) + ((int(1)) * int(CantNiños))
 
         UsuarioID = int(UsuarioID)
-        HabitacionID = int(HabitacionID)
         CantNiños = int(CantNiños)
         CantAdultos = int(CantAdultos)
         PrecioTotal = int(PrecioTotal)
