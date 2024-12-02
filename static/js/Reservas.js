@@ -19,11 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function actualizarPrecioTotal() {
         const cantidadAdultos = parseInt(cantidadAdultosInput.value) || 0;
         const cantidadNinos = parseInt(cantidadNinosInput.value) || 0;
-        const precioTotal = (cantidadAdultos * precioPorAdulto) + (cantidadNinos * precioPorNino);
-        totalElement.textContent = precioTotal;
+        totalElement.Content = (cantidadAdultos * precioPorAdulto) + (cantidadNinos * precioPorNino);
     }
-    cantidadAdultosInput.addEventListener('input', actualizarPrecioTotal);
-    cantidadNinosInput.addEventListener('input', actualizarPrecioTotal);
+    cantidadAdultosInput.addEventListener('click', actualizarPrecioTotal);
+    cantidadNinosInput.addEventListener('click', actualizarPrecioTotal);
     actualizarPrecioTotal();
 
 });

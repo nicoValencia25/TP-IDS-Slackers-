@@ -269,7 +269,7 @@ def terminar_reserva(HabitacionID):
         except requests.exceptions.RequestException as e:
             flash(f'Error al crear la reserva: {e}', 'danger')
 
-    return render_template('terminar_reserva.html', filtrado_no_disponibles=filtrado_no_disponibles)
+    return render_template('terminar_reserva.html', filtrado_no_disponibles=filtrado_no_disponibles, precio_adulto=precio_adulto, precio_ninio=precio_ninio)
 
 
 @app.route('/reserva')
