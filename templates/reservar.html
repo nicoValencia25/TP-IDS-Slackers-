@@ -1,87 +1,107 @@
 {% extends 'base.html' %}
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/galeria.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
 {% endblock %}
 {% block body %}
 
-
-
 <div class="contenedor_info_back">
-
-
     <div class="contenedor_info">
-
         <h2 class="texto_info_titulo"> {{ hotel.Nombre }} </h2>
         <h5 class="texto_info" style="color: #72a522">{{ hotel.Direccion }}, {{ hotel.Localidad }}, {{ hotel.CodigoPostal }} {{ hotel.Provincia }}</h5>
 
-        <div class="contenedor">
-            <div class="contenedor-galeria">
-                <div class="deslizar deslizar-izquierda">
+        <div class="contenedor-galeria">
+            <div class="contenido-galeria">
+                <div class="deslizar deslizar-izquierda" id="deslizarIzquierda">
                     <img src="{{url_for('static', filename='img/flecha-izquierda.png')}}">
                 </div>
 
-                <img class="mostrar-imagenes" src="{{url_for('static', filename='img/ImgHotelesBD/'+imagenes_hotel[0]['ImgHotel'])}}">
+                <img class="mostrar-imagenes" id="mostrarImagenes" src="{{url_for('static', filename='img/ImgHotelesBD/'+imagenes_hotel[0]['ImgHotel'])}}">
 
-                <div class="contenedor-imagenes oculto">
+                <span class="contenedor-imagenes oculto" id="contenedorImagenes">
                     {% for imagen in imagenes_hotel %}
-                        <div src="{{url_for('static', filename='img/ImgHotelesBD/'+imagen['ImgHotel'])}}"></div>
-
+                        <span src="{{url_for('static', filename='img/ImgHotelesBD/'+imagen['ImgHotel'])}}"></span>
                     {% endfor %}
-                </div>
+                </span>
 
-
-                <div class="deslizar deslizar-derecha">
+                <div class="deslizar deslizar-derecha" id="deslizarDerecha">
                     <img src="{{url_for('static', filename='img/flecha-derecha.png')}}">
                 </div>
             </div>
-            <span class="contador"></span>
+            <span class="contador" id="contador"></span>
         </div>
 
         <p class="texto_info">{{ hotel.Descripcion }}</p>
-
     </div>
-
-
 
     <div class="contenedor_info2">
-            <h3 class="texto_info_titulo_tabla">Tipos de Habitaciones</h3>
+        <h3 class="texto_info_titulo_tabla">Tipos de Habitaciones</h3>
 
-
-            <table class="tabla_habitaciones">
-                <thead class="thead_hab">
+        <table class="tabla_habitaciones">
+            <thead class="thead_hab">
                 <tr>
-                    <th class="th_l">Tipo de Habitacion</th>
-                    <th class="th_l">Descripcion</th>
-                    <th>Cantidad de Huespedes</th>
-                    <th>Precio Adulto</th>
-                    <th>Superficie</th>
-                    <th>Numero</th>
-                    <th>Reservar</th>
+                    <th class="th_l">Tipo de Habitación</th>
+                    <th class="th_l">Descripción</th>
+                    <th class="th_l">Cantidad de Huéspedes</th>
+                    <th class="th_l">Precio por Adulto</th>
+                    <th class="th_l">Precio por Menor</th>
+                    <th class="th_l">Reservar</th>
+                </tr>
+            </thead>
 
+            <tbody>
+                {% for habit in habitaciones %}
+                <tr>
+                    <td class="td_hab_l">
+                        <a onclick="Abrir({{ habit.TipoID }})" class="texto-click">{{ habit.Nombre }}</a>
+                    </td>
+                    <td class="td_hab_l">{{ habit.Descripcion }}</td>
+                    <td class="td_hab">{{ habit.CantHuespedes }}</td>
+                    <td class="td_hab">${{ habit.PrecioAdulto }}</td>
+                    {% if habit.PrecioNiño == None %}
+                        <td class="td_hab" style="color: red">Solo un huesped</td>
+                    {% else %}
+                        <td class="td_hab">${{ habit.PrecioNiño }}</td>
+                    {% endif %}
+                    <td class="td_hab"><a class="texto-click" href='{{ url_for('seleccion_habitacion', TipoID=habit.TipoID, PrecioAdulto=habit.PrecioAdulto, _external=True) }}'>IR</a></td>
                 </tr>
 
-                </thead>
+                <div class="modal" id="modalHabitacion{{ habit.TipoID }}">
+                    <div class="contenido-modal">
+                        <span class="boton-cerrar" onclick="Cerrar({{ habit.TipoID }})">&times;</span>
+                        <h3 class="texto_info_titulo">{{ habit.Nombre }}</h3>
+                        <div class="contenedor-galeria">
+                            <div class="contenido-galeria">
+                                <div class="deslizar deslizar-izquierda" id="deslizarIzquierda{{ habit.TipoID }}">
+                                    <img src="{{url_for('static', filename='img/flecha-izquierda.png')}}">
+                                </div>
 
-                <tbody>
-                    {% for habit in habitacion %}
-                    <tr>
-                        <td class="td_hab_l">{{ habit.Nombre }}</td>
-                        <td class="td_hab_l">{{ habit.Descripcion }}</td>
-                        <td class="td_hab">{{ habit.CantHuespedes }}</td>
-                        <td class="td_hab">${{ habit.PrecioAdulto }}</td>
-                        <td class="td_hab">{{ habit.Superficie }}</td>
-                        <td class="td_hab">{{ habit.TipoID }}</td>
-                        <td class="td_hab"><a href='{{ url_for('seleccion_habitacion', TipoID=habit.TipoID, PrecioAdulto=habit.PrecioAdulto, _external=True) }}'>IR</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
+                                <img class="mostrar-imagenes" id="mostrarImagenes{{ habit.TipoID }}" src="{{url_for('static', filename='img/ImgHotelesBD/'+imagenes_habitaciones[habit.TipoID][0])}}">
 
-            </table>
+                                <span class="contenedor-imagenes oculto" id="contenedorImagenes{{ habit.TipoID }}">
+                                    {% for imagen in imagenes_habitaciones[habit.TipoID] %}
+                                        <span src="{{url_for('static', filename='img/ImgHotelesBD/'+imagen)}}"></span>
+                                    {% endfor %}
+                                </span>
+
+                                <div class="deslizar deslizar-derecha" id="deslizarDerecha{{ habit.TipoID }}">
+                                    <img src="{{url_for('static', filename='img/flecha-derecha.png')}}">
+                                </div>
+                            </div>
+                            <span class="contador" id="contador{{ habit.TipoID }}"></span>
+                        </div>
+                        <div class="datos-modal">
+                            <p>Huéspedes: {{ habit.CantHuespedes }}</p>
+                            <p>Tamaño: {{ habit.Superficie }} m<sup>2</sup></p>
+                            <p>{{ habit.Descripcion }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-
-
-
-
 </div>
-    <script src="{{ url_for('static', filename='js/galeria.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/galerias.js') }}"></script>
 {% endblock %}
