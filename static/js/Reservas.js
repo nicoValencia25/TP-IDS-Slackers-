@@ -1,6 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const confirmarBtn = document.getElementById('boton_confirmar');
     const cancelarBtn = document.getElementById('cancelar_reserva');
+    const precioPorAdulto = 100;
+    const precioPorNino = 50;
+    const cantidadAdultosInput = document.getElementById('cantidad_de_adultos');
+    const cantidadNinosInput = document.getElementById('cantidad_de_niños');
+    const totalElement = document.getElementById('total');
+
 
 
     confirmarBtn.addEventListener('click', function(event) {
@@ -9,4 +15,15 @@ document.addEventListener('DOMContentLoaded', function() {
     cancelarBtn.addEventListener('click', function(event) {
         alert('Reserva Cancelada');
     })
+
+    function actualizarPrecioTotal() {
+        const cantidadAdultos = parseInt(cantidadAdultosInput.value) || 0;
+        const cantidadNinos = parseInt(cantidadNinosInput.value) || 0;
+        const precioTotal = (cantidadAdultos * precioPorAdulto) + (cantidadNinos * precioPorNino);
+        totalElement.textContent = precioTotal;
+    }
+    cantidadAdultosInput.addEventListener('input', actualizarPrecioTotal);
+    cantidadNinosInput.addEventListener('input', actualizarPrecioTotal);
+    actualizarPrecioTotal();
+
 });

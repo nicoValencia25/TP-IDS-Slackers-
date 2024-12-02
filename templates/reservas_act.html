@@ -20,11 +20,12 @@
 <!-- todas las reservas-->
        {% for data in reservas %}
         <div class="contenedor_reserva_unica">
-
+        <p class="precio_total">Precio Total: ${{ data.PrecioTotal }}</p>
             <h3 class="reservas_cont">ID de la Reserva: {{ data.ReservaID }}</h3>
             <div class="info_lugar" style="width: 600px">
                 <p>Fecha de entrada: {{ data.Desde }}</p>
                 <p>Fecha de salida: {{ data.Hasta }}</p>
+
                 <img class="muestra2" src="" alt="">
                 <div class="en_curso2">
                     <img class="mini_logo" src="{{ url_for('static',filename='img/logo_mini.png') }}" alt="">

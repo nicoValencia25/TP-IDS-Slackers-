@@ -1020,7 +1020,7 @@ tr a {
 
 .contenedor_edit_reservas{
     width: 450px;
-    float: left;
+    margin-left: 360px;
 
 
 
@@ -1073,6 +1073,7 @@ tr a {
     align-content: center;
     margin-right: 450px;
     margin-top: 20px;
+    margin-left: 200px;
 
 }
 
@@ -1087,5 +1088,17 @@ tr a {
 
     padding: 20px;
     border-radius: 16px;
+
+}
+
+
+
+.precio_total{
+    float: right;
+    border: #6610f2;
+    border-radius: 16px;
+    border-style: solid;
+    padding: 10px;
+
 
 }

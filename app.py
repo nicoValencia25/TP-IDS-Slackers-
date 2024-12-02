@@ -186,7 +186,40 @@ def terminar_reserva(HabitacionID):
         flash(f'Error al obtener las reservas: {e}', 'danger')
         return redirect(url_for('terminar_reserva', HabitacionID=HabitacionID))
 
+    Precios = []
+    Habitaciones = []
 
+    # Obtener las habitaciones
+    try:
+        precio_habitaciones_response = requests.get(API_URL + 'habitaciones')
+        precio_habitaciones_response.raise_for_status()
+        precio_habitaciones = precio_habitaciones_response.json()
+    except requests.exceptions.RequestException as e:
+        print(f'Error al obtener las habitaciones: {e}')
+
+    # Filtrar habitaciones por HabitacionID
+    for habi in precio_habitaciones:
+        if habi['HabitacionID'] == int(HabitacionID):
+            Habitaciones.append(habi)
+
+    # Obtener los tipos de habitación
+    try:
+        precio_tipo_response = requests.get(API_URL + 'tipos_de_habitacion')
+        precio_tipo_response.raise_for_status()
+        precio_tipo = precio_tipo_response.json()
+    except requests.exceptions.RequestException as e:
+        print(f'Error al obtener los tipos de habitación: {e}')
+
+    # Filtrar precios por TipoID
+    for habi in Habitaciones:
+        for precio in precio_tipo:
+            if precio['TipoID'] == habi['TipoID']:
+                Precios.append(precio)
+
+        # Obtener precios de adultos y niños
+
+        precio_adulto = Precios[0]['PrecioAdulto']
+        precio_ninio = Precios[0]['PrecioNiño']
 
     filtrado_no_disponibles = []
     HabitacionID = int(HabitacionID)
@@ -205,7 +238,7 @@ def terminar_reserva(HabitacionID):
             flash('Todos los campos son obligatorios', 'danger')
             return redirect(url_for('terminar_reserva', HabitacionID=HabitacionID))
 
-        PrecioTotal = (int(1) * int(CantAdultos)) + (int(1) * int(CantNiños))
+        PrecioTotal = (precio_adulto * int(CantAdultos)) + (precio_ninio * int(CantNiños))
 
         try:
             Desde_obj = datetime.strptime(Desde_str, formato_entrada)
