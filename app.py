@@ -102,13 +102,13 @@ def book_hotel(HotelID):
         response.raise_for_status()
         hotel = response.json()
 
-        response_img = requests.get(API_URL + 'img_hoteles')
-        response_img.raise_for_status()
-        imagenes_json = response_img.json()
-        imagenes_hotel = list()
-        for imagen in imagenes_json:
-            if int(HotelID) == imagen['HotelID']:
-                imagenes_hotel.append(imagen)
+        response_img_hoteles = requests.get(API_URL + 'img_hoteles')
+        response_img_hoteles.raise_for_status()
+        imagenes_hoteles_json = response_img_hoteles.json()
+        imagenes_hoteles_filtradas = list()
+        for imagen_hotel in imagenes_hoteles_json:
+            if int(HotelID) == imagen_hotel['HotelID']:
+                imagenes_hoteles_filtradas.append(imagen_hotel)
 
         hab_response = requests.get(API_URL + 'tipos_de_habitacion')
         hab_response.raise_for_status()
@@ -119,7 +119,25 @@ def book_hotel(HotelID):
             if habit['HotelID'] == HotelID:
                 habitaciones_filtradas.append(habit)
 
-        return render_template('reservar.html', hotel=hotel, imagenes_hotel=imagenes_hotel, habitacion=habitaciones_filtradas)
+        response_img_habitaciones = requests.get(API_URL + 'img_habitaciones')
+        response_img_habitaciones.raise_for_status()
+        imagenes_habitaciones_json = response_img_habitaciones.json()
+
+        primer_tipoid = habitaciones_filtradas[0]['TipoID']
+        ultimo_tipoid = habitaciones_filtradas[len(habitaciones_filtradas)-1]['TipoID']
+        lista_tipos_de_habitacion = list(range(primer_tipoid, ultimo_tipoid+1))
+
+        imagenes_habitaciones_filtradas = dict()
+
+        for clave in lista_tipos_de_habitacion:
+            imagenes_habitaciones_filtradas[clave] = []
+
+        for imagen_habitacion in imagenes_habitaciones_json:
+            if int(imagen_habitacion['TipoID']) in lista_tipos_de_habitacion:
+                imagenes_habitaciones_filtradas[int(imagen_habitacion['TipoID'])].append(imagen_habitacion['ImgHabitacion'])
+
+
+        return render_template('reservar.html', hotel=hotel, imagenes_hotel=imagenes_hoteles_filtradas, habitaciones=habitaciones_filtradas, imagenes_habitaciones=imagenes_habitaciones_filtradas)
 
 
 @app.route('/habitaciones/<TipoID>')
