@@ -148,7 +148,7 @@ CREATE TABLE `Reservas` (
   `HabitacionID` int NOT NULL,
   `UsuarioID` int NOT NULL,
   PRIMARY KEY (`ReservaID`,`HabitacionID`,`UsuarioID`),
-  KEY `HabID` (`HabitacionID`),
+  KEY `HabitacionID` (`HabitacionID`),
   KEY `UsuarioID` (`UsuarioID`),
   CONSTRAINT `Reservas_ibfk_1` FOREIGN KEY (`HabitacionID`) REFERENCES `Habitaciones` (`HabitacionID`),
   CONSTRAINT `Reservas_ibfk_2` FOREIGN KEY (`UsuarioID`) REFERENCES `Usuarios` (`UsuarioID`)
@@ -166,13 +166,13 @@ INSERT INTO `Reservas` VALUES (1,'2024-11-15 20:05:21','2025-01-14 00:00:00','20
 UNLOCK TABLES;
 
 --
--- Table structure for table `ServicioContratado`
+-- Table structure for table `ServiciosContratados`
 --
 
-DROP TABLE IF EXISTS `ServicioContratado`;
+DROP TABLE IF EXISTS `ServiciosContratados`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ServicioContratado` (
+CREATE TABLE `ServiciosContratados` (
   `ServicioContratadoID` int NOT NULL AUTO_INCREMENT,
   `Creacion` datetime NOT NULL,
   `PrecioTotal` int NOT NULL,
@@ -181,18 +181,18 @@ CREATE TABLE `ServicioContratado` (
   PRIMARY KEY (`ServicioContratadoID`,`ServicioID`,`ReservaID`),
   KEY `ServicioID` (`ServicioID`),
   KEY `ReservaID` (`ReservaID`),
-  CONSTRAINT `ServicioContratado_ibfk_1` FOREIGN KEY (`ServicioID`) REFERENCES `Servicios` (`ServicioID`),
-  CONSTRAINT `ServicioContratado_ibfk_2` FOREIGN KEY (`ReservaID`) REFERENCES `Reservas` (`ReservaID`)
+  CONSTRAINT `ServiciosContratados_ibfk_1` FOREIGN KEY (`ServicioID`) REFERENCES `Servicios` (`ServicioID`),
+  CONSTRAINT `ServiciosContratados_ibfk_2` FOREIGN KEY (`ReservaID`) REFERENCES `Reservas` (`ReservaID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ServicioContratado`
+-- Dumping data for table `ServiciosContratados`
 --
 
-LOCK TABLES `ServicioContratado` WRITE;
-/*!40000 ALTER TABLE `ServicioContratado` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ServicioContratado` ENABLE KEYS */;
+LOCK TABLES `ServiciosContratados` WRITE;
+/*!40000 ALTER TABLE `ServiciosContratados` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ServiciosContratados` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -298,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-30 21:43:37
+-- Dump completed on 2024-11-27 21:56:15
