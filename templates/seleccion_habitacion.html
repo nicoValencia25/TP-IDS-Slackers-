@@ -3,14 +3,12 @@
 
 
     <div class="contenedor_info2_2">
-            <h3 class="texto_info_titulo_tabla2">Tipos de Habitaciones</h3>
+            <h3 class="texto_info_titulo_tabla2">Habitaciones</h3>
 
 
             <table class="tabla_habitaciones_2">
                 <thead class="thead_hab">
                 <tr>
-                    <th class="th_l">Imagen</th>
-                    <th class="th_l">Tipo de Habitacion</th>
                     <th class="th_l">Numero de Habitacion</th>
                     <th>Piso</th>
                     <th>Seleccionar</th>
@@ -20,10 +18,12 @@
                 <tbody>
                     {% for habitacion, img in habitacion_imagen %}
                     <tr>
-                        <td class="td_hab_l"><img src="{{ url_for('static',filename="img/ImgHotelesBD"+img.ImgHabitacion) }}" alt=""></td>
-                        <td class="td_hab_l">{{ habitacion.TipoID }}</td>
                         <td class="td_hab_l">{{ habitacion.NumHabitacion }}</td>
-                        <td class="td_hab">{{ habitacion.Piso }}</td>
+                        {% if habitacion.Piso == 0 %}
+                            <td class="td_hab">PB</td>
+                        {% else %}
+                            <td class="td_hab">{{ habitacion.Piso }}</td>
+                        {% endif %}
                         <td class="td_hab"><a href='{{ url_for('terminar_reserva', HabitacionID = habitacion.HabitacionID,_external=True) }}'>IR</a></td>
                     </tr>
                     {% endfor %}
