@@ -144,7 +144,7 @@ def seleccion_habitacion(TipoID):
 
     return render_template('seleccion_habitacion.html', habitacion_imagen=habitacion_imagen)
 
-@app.route('/terminar_reserva/<HabitacionID>', methods=['GET','POST']) #aca se deberia finalizar la reserva mandando al back los datos que sean solicitados
+@app.route('/terminar_reserva/<HabitacionID>', methods=['GET', 'POST'])
 def terminar_reserva(HabitacionID):
     if 'userid' not in session:
         return render_template('iniciar_sesion.html')
@@ -152,22 +152,29 @@ def terminar_reserva(HabitacionID):
     formato_entrada = "%Y-%m-%dT%H:%M"
     formato_salida = "%Y-%m-%d %H:%M:%S"
 
-
     hora_actual = datetime.now()
     hora_actual_str = hora_actual.strftime(formato_salida)
 
+    # Obtener las reservas no disponibles desde la API externa
+    try:
+        no_disp_response = requests.get(API_URL + 'reservas')
+        no_disp_response.raise_for_status()
+        no_disponibles = no_disp_response.json()
+        reserva_id_max = max(reserva['ReservaID'] for reserva in no_disponibles)
+        reserva_id_max = int(reserva_id_max)
+        reserva_id_max = reserva_id_max + 1
 
-    no_disp_response = requests.get(API_URL + 'reservas') #voy a  mostrar solo las de esa habitacion
-    no_disp_response.raise_for_status()
-    no_disponibles = no_disp_response.json()
+    except requests.exceptions.RequestException as e:
+        flash(f'Error al obtener las reservas: {e}', 'danger')
+        return redirect(url_for('terminar_reserva', HabitacionID=HabitacionID))
+
+
+
     filtrado_no_disponibles = []
     HabitacionID = int(HabitacionID)
     for reserv in no_disponibles:
         if reserv['HabitacionID'] == HabitacionID:
             filtrado_no_disponibles.append(reserv)
-
-
-
 
     if request.method == 'POST':
         UsuarioID = session['userid']
@@ -175,47 +182,44 @@ def terminar_reserva(HabitacionID):
         Hasta_str = request.form.get('reserva_hasta')
         CantNiños = request.form.get('cantidad_de_niños')
         CantAdultos = request.form.get('cantidad_de_adultos')
-        PrecioTotal = (int(1) * int(CantAdultos)) + ((int(1)) * int(CantNiños))
 
-        UsuarioID = int(UsuarioID)
-        CantNiños = int(CantNiños)
-        CantAdultos = int(CantAdultos)
-        PrecioTotal = int(PrecioTotal)
+        if not (Desde_str and Hasta_str and CantNiños and CantAdultos):
+            flash('Todos los campos son obligatorios', 'danger')
+            return redirect(url_for('terminar_reserva', HabitacionID=HabitacionID))
 
-        Desde_obj = datetime.strptime(Desde_str, formato_entrada)
-        Desde_t = Desde_obj.strftime(formato_salida)
-        Hasta_obj = datetime.strptime(Hasta_str, formato_entrada)
-        Hasta_t = Hasta_obj.strftime(formato_salida)
+        PrecioTotal = (int(1) * int(CantAdultos)) + (int(1) * int(CantNiños))
+
+        try:
+            Desde_obj = datetime.strptime(Desde_str, formato_entrada)
+            Desde_t = Desde_obj.strftime(formato_salida)
+            Hasta_obj = datetime.strptime(Hasta_str, formato_entrada)
+            Hasta_t = Hasta_obj.strftime(formato_salida)
+        except ValueError:
+            flash('Formato de fecha incorrecto', 'danger')
+            return redirect(url_for('terminar_reserva', HabitacionID=HabitacionID))
 
         reserva = {
-            'ReservaID' : 2, #momentaneamente hasta q se arregle
-
+            'ReservaID': reserva_id_max,
             'Creacion': hora_actual_str,
             'Desde': Desde_t,
             'Hasta': Hasta_t,
-            'CantNiños': CantNiños,
-            'CantAdultos': CantAdultos,
+            'CantNiños': int(CantNiños),
+            'CantAdultos': int(CantAdultos),
             'PrecioTotal': PrecioTotal,
             'HabitacionID': HabitacionID,
-            'UsuarioID': UsuarioID,
+            'UsuarioID': int(UsuarioID),
         }
 
         try:
-            response = requests.post(API_URL+'reservas', json=reserva)
-            response.raise_for_status()  # Esto generará una excepción si la respuesta contiene un error HTTP
-            flash('Reserva creada con exito!')
+            response = requests.post(API_URL + 'reservas', json=reserva)
+            response.raise_for_status()
+            flash('Reserva creada con éxito!', 'success')
             return redirect(url_for('reservas'))
         except requests.exceptions.RequestException as e:
-            flash(f'error al crear la reserva: {e}')
+            flash(f'Error al crear la reserva: {e}', 'danger')
 
-    return render_template('terminar_reserva.html',  filtrado_no_disponibles = filtrado_no_disponibles)
+    return render_template('terminar_reserva.html', filtrado_no_disponibles=filtrado_no_disponibles)
 
-
-@app.route('/fechas_ocupadas')
-def fechas_ocupadas():
-
-
-    return jsonify()
 
 @app.route('/reserva')
 def reservas():
