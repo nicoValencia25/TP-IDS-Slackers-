@@ -241,16 +241,18 @@ def reservas():
     return render_template('reservas_act.html', reservas=mis_reservas)
 
 
-@app.route('/reserva/<int:reserva_id>', methods=['POST'])
-def cancelar_reserva(reserva_id):
+@app.route('/cancelar_reserva/<ReservaID>', methods=['POST'])
+def cancelar_reserva(ReservaID):
     if request.method == 'POST':
         try:
-            response = requests.delete(API_URL+'reservas/'+reserva_id)
+            response = requests.delete(API_URL+'reservas/'+ReservaID)
             response.raise_for_status()
             flash('Reserva cancelada con exito!')
             return redirect(url_for('reservas'))
         except requests.exceptions.RequestException as e:
             flash(f'error al cancelar la reserva: {e}')
+
+        return render_template("ReservaCancelada.html")
 
 
 @app.route('/sobre_nosotros')

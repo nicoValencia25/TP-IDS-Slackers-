@@ -1082,3 +1082,13 @@ th{
 .titulo_reservas_no_disponibles{
 
 }
+
+.reserva_cancelada_exito{
+    background-color: #FFFFFF;
+    width: 300px;
+    text-align: center;
+
+    padding: 20px;
+    border-radius: 16px;
+
+}
