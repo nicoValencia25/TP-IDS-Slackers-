@@ -56,7 +56,7 @@
                         <a onclick="Abrir({{ habit.TipoID }})" class="texto-click">{{ habit.Nombre }}</a>
                     </td>
                     <td class="td_hab_l">{{ habit.Descripcion }}</td>
-                    <td class="td_hab">{{ habit.CantHuespedes }}</td>
+                    <td class="td_hab">{{ habit.CantHuespedes }} <i class="fa fa-user text-primary me-2"></i></td>
                     <td class="td_hab">${{ habit.PrecioAdulto }}</td>
                     {% if habit.PrecioNiño == None %}
                         <td class="td_hab" style="color: red">Solo un huesped</td>
