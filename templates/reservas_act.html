@@ -12,31 +12,35 @@
 <!-- cuerpo ¿uso con for? -->
 <h1 class="titulo_actuales">Mis Reservas</h1>
 
-
-
             <div class="contenedor_reser2">
              <h1 class="reservas_title"></h1>
 
 <!-- todas las reservas-->
-       {% for data in reservas %}
+       {% for data in mostrar_en_reservas %}
         <div class="contenedor_reserva_unica">
-        <p class="precio_total">Precio Total: ${{ data.PrecioTotal }}</p>
-            <h3 class="reservas_cont">ID de la Reserva: {{ data.ReservaID }}</h3>
-            <div class="info_lugar" style="width: 600px">
-                <p>Fecha de entrada: {{ data.Desde }}</p>
-                <p>Fecha de salida: {{ data.Hasta }}</p>
 
-                <img class="muestra2" src="" alt="">
-                <div class="en_curso2">
-                    <img class="mini_logo" src="{{ url_for('static',filename='img/logo_mini.png') }}" alt="">
-                    <p class="mini_txt">En Curso</p>
-                </div>
-
+            <h3 class="reservas_titulo">ID de Reserva: {{ data[0].ReservaID }}</h3>
+            <div class="info_lugar">
+                <p><span class="verde" >Tipo de Habitación:</span> {{ data[2].Nombre }}</p>
+                {% if data[1].Piso == 0  %}
+                    <p><span class="verde" >Piso:</span> PB</p>
+                {% else  %}
+                    <p><span class="verde" >Piso:</span> {{ data[1].Piso }}</p>
+                {% endif  %}
+                <p><span class="verde" >Habitación:</span> {{ data[1].NumHabitacion }}</p>
+                <p><span class="verde" >Huéspedes:</span> {{ data[0].CantAdultos + data[0].CantNiños }}</p>
+                <p><span class="verde" >Precio Total:</span> ${{ data[0].PrecioTotal }}</p>
+                <p><span class="verde" >Creación:</span> {{ data[0].Creacion }}</p>
+                <p><span class="verde" >Check-In:</span> {{ data[0].Desde }}</p>
+                <p><span class="verde" >Check-Out:</span> {{ data[0].Hasta }}</p>
 
             </div>
-            <form action="{{ url_for('cancelar_reserva', ReservaID = data.ReservaID) }}" method="post">
-            <button type="submit" class="cancelar_reserva" id="cancelar_reserva">Cancelar Reserva</button>
-            </form>
+            <div>
+                <form action="{{ url_for('cancelar_reserva', ReservaID = data[0].ReservaID) }}" method="post">
+                    <button type="submit" class="boton boton-cancelar" id="cancelar_reserva">Cancelar Reserva</button>
+                </form>
+                <a class="boton boton-detalles" href="{{ url_for('book_hotel', HotelID = data[2].HotelID) }}">Ver Hotel</a>
+            </div>
         </div>
 
 {% endfor %}
