@@ -280,16 +280,48 @@ def reservas():
 
     UsuarioID = session['userid']
 
-    response = requests.get(API_URL + 'reservas')
-    response.raise_for_status()
-    reserva = response.json()
+    #Obtención de reservas y HabitacionID
+
+    response_reservas = requests.get(API_URL + 'reservas')
+    response_reservas.raise_for_status()
+    reservas = response_reservas.json()
     mis_reservas = []
+    lista_habitaciones_id = list()
     UsuarioID = int(UsuarioID)
-    for res in reserva:
+    for res in reservas:
         if res['UsuarioID'] == UsuarioID:
-            mis_reservas.append(res)
+            mis_reservas.append(res) #dato a pasar
+            lista_habitaciones_id.append(res['HabitacionID'])
+
+    def ConseguirDatos(path, lista_de_id, columna_id=None):
+        response = requests.get(API_URL + path)
+        response.raise_for_status()
+        json_todos = response.json()
+        json_filtrado = list()
+        lista_id_traer = lista_de_id
+        lista_id_enviar = list()
+
+        for id in lista_id_traer:
+            index = int(id-1)
+
+            #Va directamente por índice a buscar el json correspondiente al id
+            json_filtrado.append(json_todos[index]) #dato a pasar
+            if columna_id != None:
+                lista_id_enviar.append(json_todos[index][columna_id])
+
+        if columna_id != None:
+            return json_filtrado, lista_id_enviar
+        else:
+            return  json_filtrado
+
+
+    habitaciones, lista_tipos_id = ConseguirDatos('habitaciones', lista_habitaciones_id, 'TipoID')
+
+    tipos_de_habitacion = ConseguirDatos('tipos_de_habitacion', lista_tipos_id)
+
+    mostrar_en_reservas = zip(mis_reservas,habitaciones,tipos_de_habitacion)
     
-    return render_template('reservas_act.html', reservas=mis_reservas)
+    return render_template('reservas_act.html', mostrar_en_reservas = mostrar_en_reservas)
 
 
 @app.route('/cancelar_reserva/<ReservaID>', methods=['POST'])
