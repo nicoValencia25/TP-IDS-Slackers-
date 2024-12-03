@@ -523,6 +523,10 @@ body {
     border-right: none;
 }
 
+.contenedor-footer {
+    display: flex;
+    justify-content: center;
+}
 
 /* reservas actuales */
 
@@ -543,31 +547,42 @@ body {
 }
 
 .contenedor_reserva_unica{
-    padding-left: 200px;
-    padding-right: 100px;
-    padding-top: 100px;
-    padding-bottom: 20px;
+    padding: 10px 20px;
     background-color: #FFFFFF;
-    margin-right: 200px;
-    margin-top: 20px;
-    height: 240px;
+    margin: 20px auto;
+    width: 60%;
     border-style: solid;
     border-color: #6610f2;
-
+    display: flex;
+    flex-direction: column;
 }
 
+.contenedor-hoteles-disponibles {
+    background-color: #FFFFFF;
+    margin: 20px auto;
+    width: 60%;
+    border-style: solid;
+    border-color: #6610f2;
+    display: flex;
+}
 
-.reservas_cont{
-    padding-left: 100px;
-    margin-top: -75px;
-
+.contenedor-reservar-ahora {
+    width: 20%;
+    display: flex;
+    align-items: end;
+    margin-bottom: 10px;
+    margin-right: 10px;
 }
 
 .info_lugar{
-    padding-left: 100px;
     color: #14141F;
-    width: 400px;
-    height: 100px;
+    width: 70%;
+}
+
+.info-lugar-hoteles{
+    color: #14141F;
+    width: 70%;
+    padding: 10px;
 }
 
 .editar_reserva{
@@ -579,13 +594,29 @@ body {
     color: #FFFFFF;
 }
 
-.cancelar_reserva{
+.boton{
     float: right;
     padding: 10px;
-    background-color: red;
+    margin-left: 10px;
     border: 0px;
     color: #FFFFFF;
+}
 
+.boton-cancelar {
+    background-color: red;
+}
+
+.boton-detalles {
+    background-color: #6610f2;
+}
+
+.boton-detalles:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.verde {
+    color: #72a522;
 }
 
 .titulo_actuales{
@@ -598,25 +629,7 @@ body {
     margin-right: 700px;
 
 }
-.en_curso2{
-    margin-top: 20px;
-}
 
-.mini_logo{
-    width: 30px;
-    height: 30px;
-    float: left;
-}
-
-.mini_txt{
-
-    padding-left: 20px;
-    color: blue;
-
-    padding-top: 5px;
-    padding-bottom: 5px;
-    
-}
 .mini_txt2{
     margin-left: 250px;
     padding-left: 20px;
@@ -643,14 +656,13 @@ body {
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
 .muestra{
     width: 275px;
     height: 234px;
-    margin-left: -300px;
     float: left;
-    margin-top: -187px;
-
 }
+
 .muestra2{
     width: 275px;
     height: 230px;
@@ -711,14 +723,13 @@ margin-top: 10px;
 }
 
 .contenedor_reser2{
-    padding-left: 200px;
     color: #6610f2;
     background-color: #9f9e9e;
-    padding-bottom:0px;
     height: fit-content;
-    padding-bottom: 50px;
-    margin-bottom: -50px;
+    display: flex;
+    flex-direction: column;
 }
+
 .inicio_sesion{
     color: #FFFFFF;
     font-size: 30px;
@@ -809,15 +820,11 @@ background-color: #6610f2;
 
 .contenedor_info_back{
     align-content: center;
-    padding-left: 20px;
     color: #6610f2;
     background-color: #dee2e6;
-    padding-bottom:0px;
     height: fit-content;
-    padding-bottom: 50px;
+    padding: 50px 50px;
     margin-bottom: -50px;
-    padding-right: 50px;
-    padding-top: 70px;
 }
 
 .texto_info_titulo{
@@ -837,11 +844,12 @@ background-color: #6610f2;
 
 .tabla_habitaciones{
     border: solid 1px #0d6efd;
-    table-layout: fixed;
+    table-layout: auto;
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 10px;
     overflow: auto;
+    width: 100%;
 }
 
 .tabla_habitaciones_2{
@@ -888,9 +896,9 @@ th{
 }
 
 .texto_info_titulo_tabla{
-    margin-top: 20px;
+    margin-top: 10px;
     width: 500px;
-    margin-left: 47px;
+    margin-left: 10px;
 }
 
 .texto_info_titulo_tabla2{
@@ -900,9 +908,8 @@ th{
 
 .contenedor_info2{
     background-color: #FFFFFF;
-    float: right;
     width: 100%;
-    justify-content: center;
+    padding: 5px 20px 5px 0;
     border-radius: 1rem;
     margin-right: -15px;
 }
