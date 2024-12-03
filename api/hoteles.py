@@ -25,7 +25,7 @@ DELETE FROM Hoteles WHERE HotelID = :HotelID
 """
 
 QUERY_HOTELID_BY_HABID = """
-SELECT Hoteles.HotelID, Nombre, Provincia, Descripcion, Direccion, CodigoPostal, Localidad, Longitud, Latitud
+SELECT Hoteles.HotelID, Hoteles.Nombre, Provincia, Hoteles.Descripcion, Direccion, CodigoPostal, Localidad, Longitud, Latitud
 FROM Hoteles
 INNER JOIN TiposDeHabitacion on TiposDeHabitacion.HotelID = Hoteles.HotelID
 INNER JOIN Habitaciones on Habitaciones.TipoID = TiposDeHabitacion.TipoID
