@@ -55,8 +55,3 @@ function InicializarGaleria(tipoID) {
 }
 
 
-
-
-deslizarIzquierda.addEventListener("click", DeslizarIzquierda)
-
-deslizarDerecha.addEventListener("click", DeslizarDerecha)
